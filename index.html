@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dear, TOKYO · Near &amp; Deem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#f4efe9; --bg:#faf6f1; --head:#efdcd3; --card:#fff; --ink:#3b2a22; --muted:#7d6a60;
+  --line:#e8ddd3; --brown:#7a4a35; --red:#b3262d; --chip:#f3e6df; --soft:#f0eeea; --green:#e6efe3; --greenInk:#3d6b3a;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--ink);font-family:"Noto Sans Thai",system-ui,sans-serif;line-height:1.55;font-size:15px}
+a{color:inherit}
+.app{max-width:720px;margin:0 auto;background:var(--bg);min-height:100vh;padding-bottom:96px;box-shadow:0 0 0 1px var(--line)}
+header.top{background:var(--head);display:grid;grid-template-columns:76px 1fr 76px;align-items:center;padding:18px 18px;border-bottom:1px solid #e3cfc5}
+.logo{width:52px;height:52px;border-radius:14px;background:#fff;display:grid;place-items:center;font-size:30px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.ttl{text-align:center}
+.ttl b{display:block;font-size:22px;letter-spacing:.06em;font-weight:800}
+.ttl span{display:block;font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.ttl b i{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-style:italic;letter-spacing:0;color:var(--brown);margin-right:2px}
+.ttl .tag{font-size:12px;color:var(--brown);font-weight:600;letter-spacing:.02em;margin-top:3px;opacity:.85}
+.ttl .who{font-size:14px;color:var(--brown);font-weight:700;letter-spacing:.08em;margin:2px 0 1px}
+.langs{justify-self:end;display:flex;background:#fff;border-radius:10px;padding:3px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.langs button{font:inherit;font-size:12.5px;font-weight:700;border:0;background:none;color:var(--muted);padding:5px 8px;border-radius:7px;cursor:pointer}
+.langs button.on{background:var(--brown);color:#fff}
+.days{display:flex;gap:10px;overflow-x:auto;padding:18px 18px 4px;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.days a{flex:0 0 auto;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 16px;text-align:center;min-width:128px}
+.days a b{display:block;font-size:17px;font-weight:700}
+.days a small{color:var(--muted);font-size:12.5px}
+.days a.on{background:var(--brown);border-color:var(--brown);color:#fff}
+.days a.on small{color:#f1dcd2}
+.banner{margin:16px 18px 6px;background:#f5e9e3;border-left:5px solid var(--brown);border-radius:14px;padding:14px 16px;font-weight:700;font-size:16px}
+.banner small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.tl{position:relative;margin:14px 18px 0;padding-left:26px}
+.tl:before{content:"";position:absolute;left:7px;top:14px;bottom:14px;width:2px;background:#dcccc2}
+.it{position:relative;margin-bottom:12px}
+.it:before{content:"";position:absolute;left:-26px;top:22px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--brown)}
+.it.first:before{background:var(--red);border-color:var(--red);width:16px;height:16px;left:-28px;top:20px}
+.it.leg:before{border-width:2px;width:10px;height:10px;left:-25px;border-color:#a88f82;top:20px}
+.cd{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.leg .cd{background:#fbf8f5;border-style:dashed}
+.hd{display:grid;grid-template-columns:auto 1fr 22px;gap:12px;align-items:center;padding:12px 14px;cursor:pointer;width:100%;background:none;border:0;text-align:left;font:inherit;color:inherit}
+.tm{background:var(--chip);color:var(--brown);font-weight:700;border-radius:8px;padding:4px 9px;font-size:14.5px;font-variant-numeric:tabular-nums;text-align:center;min-width:58px;line-height:1.25}
+.tm small{display:block;font-size:10px;font-weight:500}
+.leg .tm{background:#eee6df;font-size:17px;padding:3px 9px}
+.nm{min-width:0}
+.nm b{display:block;font-weight:700;font-size:15.5px;line-height:1.35}
+.nm span{display:block;color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ar{color:var(--brown);font-size:14px;transition:transform .15s}
+.it.open .ar{transform:rotate(180deg)}
+.it.open .nm span{white-space:normal}
+.nm em{display:block;font-style:normal;font-size:12.5px;color:var(--brown);font-weight:600;margin:1px 0}
+.via{background:#f7f2ee;border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.vh{font-weight:700;font-size:13.5px;margin-bottom:6px;color:var(--brown)}
+.st{display:grid;grid-template-columns:26px 1fr;gap:8px;padding:8px 0;border-top:1px dashed #e3d6cc;font-size:13.5px}
+.st:first-of-type{border-top:0;padding-top:2px}
+.si{font-size:17px;line-height:1.4}
+.sr{font-weight:600}
+.dep{background:var(--chip);color:var(--brown);border-radius:6px;padding:0 6px;margin-right:6px;font-size:12px}
+.sh{margin-top:1px}
+.sm,.sn{color:var(--muted);font-size:12.5px}
+.sl{display:inline-block;margin-top:3px;font-size:12.5px;font-weight:600;color:var(--brown)}
+.bd{display:none;padding:0 14px 14px}
+.it.open .bd{display:block}
+.bd hr{border:0;border-top:1px dashed var(--line);margin:0 0 12px}
+.bd p{margin:0 0 10px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chips span,.chips a{font-size:12.5px;border:1px solid var(--line);border-radius:8px;padding:3px 9px;background:#fff;text-decoration:none;font-weight:600}
+.chips .g{background:var(--green);color:var(--greenInk);border-color:#cfdcca}
+.chips .r{background:#fbe8e8;color:var(--red);border-color:#f0cfcf}
+.chips a{color:var(--brown);background:var(--chip);border-color:#e7d2c7}
+.tip{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:13.5px;margin-bottom:10px}
+.tip b{display:block;margin-bottom:4px}
+.tip ul{margin:0;padding-left:18px}
+.sec{margin:20px 18px 0}
+.sec h2{font-size:18px;margin:0 0 10px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.box h3{margin:0 0 4px;font-size:16px}
+.box p{margin:4px 0;font-size:14px;color:var(--muted)}
+.box .big{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:.02em}
+.box .row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.tk{position:relative;display:grid;grid-template-columns:1fr 150px;background:#fff;border-radius:18px;margin-bottom:16px;box-shadow:0 6px 18px rgba(122,74,53,.13);overflow:hidden}
+.tk-main{padding:0 0 16px}
+.tk-top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;background:var(--brown);color:#fff;padding:9px 16px;font-size:12.5px;letter-spacing:.06em}
+.tk-top span{white-space:nowrap}
+@media (max-width:400px){.tk-top{font-size:11px;letter-spacing:.02em;padding:9px 12px}.tk-top b{font-size:13px}}
+.tk-top b{font-size:14px;letter-spacing:.08em}
+.tk-route{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:16px 16px 6px}
+.tk-route .r{text-align:right}
+.iata{font-size:34px;font-weight:800;letter-spacing:.04em;line-height:1;color:var(--ink)}
+.city{font-size:11.5px;color:var(--muted);margin-top:3px}
+.path{display:flex;align-items:center;gap:4px;position:relative;color:var(--brown);padding-bottom:14px}
+.path .line{flex:1;border-top:2px dashed #d8c3b7}
+.path .dot{width:7px;height:7px;border-radius:50%;background:var(--brown)}
+.path .pl{font-size:18px}
+.path small{position:absolute;bottom:-2px;left:0;right:0;text-align:center;font-size:11px;color:var(--muted)}
+.tk-grid{display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:8px;padding:8px 16px 0}
+.tk label,.tk-stub label{display:block;font-size:10px;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.tk-grid b{font-size:14px}
+.tk-grid sup{font-size:10px;color:var(--red);margin-left:2px}
+.tk-stub{background:#f6ebe5;border-left:2px dashed #d8c3b7;padding:16px 14px;display:flex;flex-direction:column;gap:10px;position:relative}
+.tk-stub b{font-size:14px}
+.tk-note{font-size:11.5px;color:var(--muted);margin-top:auto}
+.tk-stub:before,.tk-stub:after{content:"";position:absolute;left:-12px;width:22px;height:22px;border-radius:50%;background:var(--bg)}
+.tk-stub:before{top:-11px}.tk-stub:after{bottom:-11px}
+@media (max-width:520px){
+  .tk{grid-template-columns:1fr}
+  .tk-stub{border-left:0;border-top:2px dashed #d8c3b7;flex-direction:row;flex-wrap:wrap;gap:14px}
+  .tk-note{width:100%;margin-top:0}
+  .tk-stub:before,.tk-stub:after{top:-12px;bottom:auto}
+  .tk-stub:before{left:-11px}.tk-stub:after{left:auto;right:-11px}
+  .tk-grid{grid-template-columns:repeat(2,1fr);row-gap:10px}
+  .tk-grid div:nth-child(even){text-align:right}
+}
+.hotel .jp{font-size:13px;color:var(--muted);margin-top:-2px}
+.hotel dl{margin:10px 0 12px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13.5px;background:#f7f2ee;border-radius:12px;padding:10px 12px}
+.hotel dt{color:var(--muted);font-weight:600;font-size:12.5px;white-space:nowrap}
+.hotel dd{margin:0;user-select:all}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acts button,.acts a{font:inherit;font-size:13.5px;font-weight:600;border:1px solid #e7d2c7;background:var(--chip);color:var(--brown);border-radius:10px;padding:9px 10px;text-align:center;text-decoration:none;cursor:pointer}
+.acts button:active{transform:scale(.98)}
+.copied{height:0;overflow:hidden;opacity:0;transition:opacity .2s;font-size:13px;color:var(--greenInk);text-align:center}
+.copied.show{height:auto;opacity:1;margin-top:8px}
+.ph h3{font-size:15px;margin:20px 0 8px;color:var(--brown)}
+.phsub{margin:0;color:var(--muted);font-size:13px}
+.pr{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:7px}
+.pt{cursor:pointer;min-width:0}
+.pj{font-size:18px;font-weight:700;line-height:1.35;font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif}
+.pro{font-size:12.5px;color:var(--brown);font-style:italic}
+.pm{font-size:13.5px;color:var(--muted)}
+.spk{font-size:18px;border:1px solid #e7d2c7;background:var(--chip);border-radius:10px;width:40px;height:40px;cursor:pointer}
+.big-ov{position:fixed;inset:0;background:rgba(40,25,18,.55);z-index:20;display:grid;place-items:center;padding:20px}
+.big-ov[hidden]{display:none}
+.big-card{background:#fff;border-radius:20px;padding:28px 22px;max-width:560px;width:100%;text-align:center}
+.bj{font-size:clamp(30px,9vw,52px);font-weight:800;line-height:1.3;font-family:"Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;word-break:keep-all;overflow-wrap:anywhere}
+.bm{color:var(--muted);margin:14px 0 18px;font-size:14px}
+.bx{font:inherit;font-weight:600;border:0;background:var(--brown);color:#fff;border-radius:10px;padding:10px 28px;cursor:pointer}
+nav.bot a{font-size:12px}
+.mapwrap{overflow-x:auto;margin:8px -16px 10px;padding:0 16px;-webkit-overflow-scrolling:touch}
+.mapwrap svg{display:block;min-width:640px;width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:12.5px}
+.legend div{display:grid;grid-template-columns:22px 1fr;column-gap:6px;align-items:center}
+.legend i{height:6px;border-radius:3px;display:block}
+.legend small{grid-column:2;color:var(--muted);font-size:11px;margin-top:-2px}
+@media (max-width:520px){.legend{grid-template-columns:1fr}}
+.h2row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.h2row h2,.h2row .pdfbtn{white-space:nowrap}
+@media (max-width:400px){.h2row h2{font-size:16px}.h2row .pdfbtn{font-size:11.5px;padding:3px 8px}}
+.h2row h2{margin:0}
+.h2row .pdfbtn{margin:0}
+.pdfbtn{display:inline-block;text-decoration:none;background:var(--chip);color:var(--brown);border:1px solid #e7d2c7;border-radius:8px;padding:4px 10px;margin:0 0 12px;font-weight:600;font-size:12.5px}
+.tips ul{margin:6px 0 4px;padding-left:18px;font-size:14px}
+.tips li{margin-bottom:4px}
+.tips .chips{margin-top:8px}
+.phones{display:grid;gap:6px;margin-top:8px}
+.phones a{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;background:#f7f2ee;border-radius:10px;padding:8px 12px;font-size:13.5px}
+.phones b{font-size:17px;color:var(--red);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chk h3{font-size:15px;margin:20px 0 8px;color:var(--brown)}
+.chk label{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:7px;cursor:pointer}
+.chk input{margin-top:4px;accent-color:var(--brown);width:18px;height:18px;flex:0 0 auto}
+.chk .x b{font-weight:600}
+.chk .x .w{color:var(--brown);font-size:12px;margin-left:6px;background:var(--chip);border-radius:6px;padding:1px 6px}
+.chk .x p{margin:3px 0 0;color:var(--muted);font-size:13px;white-space:pre-line}
+.chk label.done{background:#f3f7f1}
+.chk label.done .x b{text-decoration:line-through;color:var(--muted)}
+.prog{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin:4px 0}
+.prog div{height:100%;background:var(--brown);transition:width .2s}
+nav.bot{position:fixed;bottom:0;left:0;right:0;z-index:10}
+nav.bot .in{max-width:720px;margin:0 auto;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 0 calc(8px + env(safe-area-inset-bottom))}
+nav.bot a{text-decoration:none;text-align:center;font-size:13px;font-weight:600;color:var(--muted);padding:4px 0;position:relative}
+nav.bot a i{display:block;font-style:normal;font-size:24px;line-height:1.2}
+nav.bot a.on{color:var(--brown)}
+nav.bot a.on:after{content:"";position:absolute;bottom:-4px;left:50%;width:26px;height:3px;border-radius:3px;background:var(--brown);transform:translateX(-50%)}
+.note{color:var(--muted);font-size:12px;text-align:center;margin:20px 18px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="logo">🗻</div>
+    <div class="ttl"><b><i>dear,</i> TOKYO</b><span>2 – 7 DEC 2026</span><span class="tag">#DearTokyoNearAndDeem</span></div>
+    <div class="langs" id="langs" role="group" aria-label="Language"><button type="button" data-lang="th">TH</button><button type="button" data-lang="en">EN</button></div>
+  </header>
+  <main id="view"></main>
+</div>
+<nav class="bot"><div class="in" id="bot">
+  <a href="#day-2" data-id="plan"><i>🗓️</i><span>แผนรายวัน</span></a>
+  <a href="#info" data-id="info"><i>✈️</i><span>เดินทาง/ที่พัก</span></a>
+  <a href="#japanese" data-id="japanese"><i>🗣️</i><span>ภาษาญี่ปุ่น</span></a>
+  <a href="#tips" data-id="tips"><i>💡</i><span>ข้อควรรู้</span></a>
+</div></nav>
+<script>
+const EN_MAP = {"พุธ 2 Dec (Wed)": "Wed 2 Dec", "ถึงโตเกียว + ชินจูกุ + Marunouchi Bright Holiday": "Arrive in Tokyo + Shinjuku + Marunouchi Bright Holiday", "สนามบิน: ดอนเมือง Terminal 1": "Airport: Don Mueang Terminal 1", "เช็คอิน โหลดกระเป๋า ช้าสุดไม่เกิน 23:30 เคาน์เตอร์ปิดราว 00:40": "Check in and drop bags by 23:30 at the latest. Counters close around 00:40", "คืน 1 Dec": "night of 1 Dec", "ไฟลต์ XJ602 ดอนเมือง → นาริตะ": "Flight XJ602 Don Mueang → Narita", "ประตูขึ้นเครื่องปิดก่อนเครื่องออกประมาณ 20 นาที": "Boarding gate closes about 20 minutes before departure", "ถึงนาริตะ Terminal 2": "Arrive at Narita Terminal 2", "ผ่าน ตม. รับกระเป๋า แล้วลงไปสถานีใต้อาคาร Terminal 2": "Clear immigration, collect bags, then go down to the station under Terminal 2", "💳 ที่สนามบินนาริตะ": "💳 At Narita Airport", "ซื้อ Suica 2 ใบ ที่ JR East Travel Service Center สถานี Airport Terminal 2·3 (ชั้น B1) ค่ามัดจำ ¥500 ต่อใบ": "Buy 2 Suica cards at the JR East Travel Service Center, Airport Terminal 2·3 station (B1). ¥500 deposit each", "รับตั๋ว N'EX ขาไปที่เดียวกัน ทุกที่นั่งต้องจอง": "Pick up the outbound N'EX tickets at the same counter. All seats are reserved", "ถ้า Suica หมด ซื้อที่สถานี JR ชินจูกุแทน": "If Suica cards are sold out, buy them at JR Shinjuku Station instead", "กรอก Visit Japan Web ให้ครบ 2 คนก่อนบิน เก็บ QR ไว้ยื่น ตม.": "Complete Visit Japan Web for both travellers before the flight and keep the QR codes for immigration", "นาริตะ T2": "Narita T2", "สถานี JR ชินจูกุ": "JR Shinjuku Station", "ตรง": "Direct", "80-90 นาที": "80-90 min", "ขึ้นที่สถานี Airport Terminal 2·3 (空港第2ビル) ใต้อาคาร ทุกที่นั่งต้องจอง": "Board at Airport Terminal 2·3 station (空港第2ビル) under the terminal. All seats are reserved", "โรงแรม": "Hotel", "เดิน": "Walk", "7-10 นาที": "7-10 min", "ออก East Exit แล้วเดินขึ้นเหนือเข้าคาบุกิโจ ใช้ลิฟต์เพราะมีกระเป๋า": "Take the East Exit and walk north into Kabukicho. Use the lifts with luggage", "ฝากกระเป๋าที่ APA Hotel Shinjuku-Kabukicho Tower": "Drop bags at APA Hotel Shinjuku-Kabukicho Tower", "เช็คอินจริงตามเวลาของโรงแรม": "Actual check-in follows the hotel's check-in time", "1-3 นาที": "1-3 min", "Kabukicho 1-9-5 ชั้น 1": "Kabukicho 1-9-5, 1F", "มื้อเที่ยง: Shaburakutei Kabukicho": "Lunch: Shaburakutei Kabukicho", "ชาบูชาบู / ซุกี้ยากี้ หม้อใครหม้อมัน เปิด 11:30": "Shabu-shabu / sukiyaki with an individual pot each. Opens 11:30", "สวนชินจูกุเกียวเอ็น": "Shinjuku Gyoen National Garden", "15-20 นาที": "15-20 min", "เดินผ่านชินจูกุ-ซันโจเมะ ไปประตู Shinjuku Gate": "Walk via Shinjuku-sanchome to the Shinjuku Gate", "ใบไม้แดง หน้าหนาวสวนปิดราว 16:00-16:30 เช็คเวลาก่อนไป": "Autumn leaves. In winter the garden closes around 16:00-16:30, so check the time first", "เช็คอิน งีบพัก": "Check in and rest", "พรุ่งนี้ไป DisneySea ทั้งวัน": "Full day at DisneySea tomorrow", "สถานีโตเกียว": "Tokyo Station", "เดินไป JR ชินจูกุ แล้ว JR Chuo Rapid (สีส้ม)": "Walk to JR Shinjuku, then JR Chuo Rapid (orange)", "~25 นาทีรวมเดิน": "~25 min incl. walking", "ขึ้นขบวน Rapid ไม่ต้องเปลี่ยนสาย": "Take a Rapid train, no transfer needed", "~5 นาที": "~5 min", "ออกฝั่ง Marunouchi งานกระจายอยู่ตึกรอบสถานี": "Exit on the Marunouchi side. The event is spread across the buildings around the station", "Marunouchi Bright Holiday (ธีม Harry Potter)": "Marunouchi Bright Holiday (Harry Potter theme)", "Hogwarts Snow Tree, Hogwarts Winter Walk, Pop-up Shop เปิด 11:00-21:00 เช็ครอบโชว์หิมะก่อนไป": "Hogwarts Snow Tree, Hogwarts Winter Walk, Pop-up Shop. Open 11:00-21:00. Check the snow show times before going", "มื้อเย็น: Tonkatsu Suzuki": "Dinner: Tonkatsu Suzuki", "อยู่ Gransta Yaekita ชั้น 1 ในสถานีโตเกียว (นอกประตูตรวจตั๋ว) ปิด 21:30 ควรถึงไม่เกิน 20:45 สั่งสันนอก (ロース) ฉ่ำกว่าสันใน เติมข้าวได้ มีเมนูอังกฤษ": "Gransta Yaekita 1F inside Tokyo Station (outside the ticket gates). Closes 21:30, arrive by 20:45. Order the loin (ロース), juicier than the fillet. Free rice refills, English menu", "JR Chuo Rapid (สีส้ม)": "JR Chuo Rapid (orange)", "~15 นาที": "~15 min", "ออก East Exit ตึก Bic Camera อยู่หน้าทางออก": "Take the East Exit. The Bic Camera building is right outside", "ช้อป: UNIQLO Shinjuku Honten + GU": "Shopping: UNIQLO Shinjuku Honten + GU", "ตึก Bic Camera: UNIQLO ชั้น 1-3, GU ชั้น 7 เปิดถึง 22:00 ซื้อ HEATTECH ไว้ใส่ไป DisneySea": "Bic Camera building: UNIQLO 1F-3F, GU 7F, open until 22:00. Buy HEATTECH to wear at DisneySea", "ซื้อครบ ¥5,500 ต่อร้านได้ tax-free": "Tax-free when you spend ¥5,500 or more per store", "ต้องพกพาสปอร์ตตัวจริง": "Bring your actual passport", "เดินกลับโรงแรม (ถ้าไหว แวะ Omoide Yokocho)": "Walk back to the hotel (stop at Omoide Yokocho if you have energy)", "เดินจากร้านไปโรงแรม ~7 นาที พรุ่งนี้ไป DisneySea ทั้งวัน อย่านอนดึก": "~7 min walk from the store to the hotel. Full day at DisneySea tomorrow, so don't stay up late", "5-7 นาที": "5-7 min", "อยู่ใกล้ทางออกฝั่งตะวันตกของสถานีชินจูกุ": "Near the west exit of Shinjuku Station", "พฤหัส 3 Dec (Thu)": "Thu 3 Dec", "Tokyo DisneySea ทั้งวัน": "Tokyo DisneySea all day", "สถานี Shinjuku-nishiguchi": "Shinjuku-nishiguchi Station", "6-8 นาที": "6-8 min", "ทั้งเส้นทางไป DisneySea ประมาณ 50-60 นาที": "About 50-60 min door to door to DisneySea", "Oedo (ฝั่ง Ryogoku / Daimon)": "Oedo (towards Ryogoku / Daimon)", "~30 นาที": "~30 min", "Yurakucho (สีทอง)": "Yurakucho (gold)", "Disney Resort Line (โมโนเรล)": "Disney Resort Line (monorail)", "ค่าโดยสารแยก แตะ Suica ได้": "Separate fare, Suica accepted", "รอหน้าประตู Tokyo DisneySea": "Wait at the Tokyo DisneySea gate", "ถึงก่อนสวนเปิด เล่นเครื่องดังตอนคิวยังสั้น": "Arrive before opening and ride the popular attractions while queues are short", "📱 แอป Tokyo Disney Resort": "📱 Tokyo Disney Resort app", "ดูเวลารอคิวแบบสด": "Live wait times", "ซื้อ Premier Access ในแอป": "Buy Premier Access in the app", "เช้า": "Morning", "โซนที่คนเยอะสุด เช็คแอปตั้งแต่เปิดสวน": "The busiest area. Check the app as soon as the park opens", "ทั้งวัน": "All day", "เครื่องเล่นหลักและโชว์": "Main rides and shows", "ค่ำ": "Evening", "โชว์กลางคืน แล้วกลับโรงแรม": "Night show, then back to the hotel", "อากาศริมทะเลหนาว ใส่เสื้อหนา กลับโรงแรมใช้เส้นทางเดิมย้อนกลับ ประมาณ 60-70 นาที": "Cold by the sea, wear a thick jacket. Return by the same route in reverse, about 60-70 min", "🌙 ขากลับหลังโชว์": "🌙 Getting back after the show", "หลังโชว์กลางคืนคนแน่นมาก เผื่อเวลาอีก 15-20 นาที": "Very crowded after the night show, allow an extra 15-20 min", "เติม Suica ก่อนออกจากสวน จะได้ไม่ต้องต่อคิวเติมเงินที่สถานี": "Top up Suica before leaving the park so you don't queue at the station", "ที่ Maihama ขึ้น JR Keiyo ขบวนไปทาง Tokyo": "At Maihama, take the JR Keiyo train towards Tokyo", "Resort Gateway Station (หน้า JR Maihama)": "Resort Gateway Station (by JR Maihama)", "~10 นาที": "~10 min", "ขึ้นที่ Tokyo DisneySea Station หน้าสวน": "Board at Tokyo DisneySea Station in front of the park", "JR Keiyo (ฝั่ง Tokyo)": "JR Keiyo (towards Tokyo)", "ขึ้นขบวนไปทาง Tokyo อย่าขึ้นฝั่ง Soga / Chiba": "Take the train towards Tokyo, not towards Soga / Chiba", "~6 นาที": "~6 min", "เปลี่ยนจาก JR เป็น Metro ในสถานี Shin-Kiba แตะ Suica ออกแล้วเข้าใหม่": "Change from JR to Metro at Shin-Kiba. Tap Suica out, then in again", "Oedo (ฝั่ง Tochomae)": "Oedo (towards Tochomae)", "ดูป้ายฝั่ง Tochomae / Shinjuku": "Follow signs for Tochomae / Shinjuku", "แวะ Gindaco ตึก Shinjuku Toho ก่อนถึงโรงแรมได้ เปิดถึง 23:00": "You can stop at Gindaco in the Shinjuku Toho building on the way, open until 23:00", "ดึก": "Late", "ทาโกะยากิ: Gindaco Highball Tavern": "Takoyaki: Gindaco Highball Tavern", "ตึก Shinjuku Toho (หัวก็อดซิล่า) เดินจากโรงแรม 1-2 นาที เปิดถึง 23:00 นั่งกินต้องสั่งเครื่องดื่มคนละ 1 แก้ว หรือซื้อกลับไปกินที่โรงแรม": "Shinjuku Toho building (Godzilla head), 1-2 min walk from the hotel. Open until 23:00. Eating in requires one drink per person, or take away to the hotel", "ศุกร์ 4 Dec (Fri)": "Fri 4 Dec", "ทัวร์ฟูจิ 1 วัน: ชูเรโตะ + คาวากุจิโกะ + โอชิโนะฮักไก": "Mt. Fuji day tour: Chureito + Kawaguchiko + Oshino Hakkai", "จุดนัดทัวร์ (ชินจูกุ West Exit)": "Tour meeting point (Shinjuku West Exit)", "ลอดใต้ทางรถไฟจากฝั่ง East Exit ไป West Exit เช็คจุดนัดจริงใน voucher": "Pass under the tracks from the East Exit to the West Exit. Check the actual meeting point on the voucher", "จุดนัดทัวร์ฟูจิ": "Mt. Fuji tour meeting point", "ทัวร์ส่วนใหญ่นัด 07:30-07:45 แถว West Exit เช่นหน้า SMBC Shinjuku Nishiguchi ไปก่อนเวลา 10-15 นาที รถไม่รอ": "Most tours meet at 07:30-07:45 near the West Exit, e.g. in front of SMBC Shinjuku Nishiguchi. Arrive 10-15 min early, the bus won't wait", "🚌 ทัวร์ฟูจิ (ยังไม่ได้จอง)": "🚌 Mt. Fuji tour (not booked yet)", "จอง Klook หรือ KKday เลือกจุดนัดฝั่งชินจูกุ": "Book on Klook or KKday with a Shinjuku meeting point", "เช็คว่ารวมอาหารกลางวันไหม": "Check whether lunch is included", "เลือกแบบยกเลิกหรือเลื่อนฟรี 24 ชม. ล่วงหน้า เผื่อวันนั้นเมฆมาก": "Choose free cancellation or date change up to 24 h before, in case it's cloudy", "หลังจองแล้ว แก้จุดนัดและเวลาให้ตรง voucher": "After booking, update the meeting point and time to match the voucher", "ชินจูกุ": "Shinjuku", "สวนโออิชิ คาวากุจิโกะ": "Oishi Park, Kawaguchiko", "รถทัวร์": "Tour bus", "~2 ชม.": "~2 h", "ระหว่างทางแวะพักห้องน้ำ วันนี้ไม่ต้องใช้ Suica": "Toilet stop on the way. No Suica needed today", "สวนโออิชิ ริมทะเลสาบคาวากุจิโกะ": "Oishi Park by Lake Kawaguchiko", "วิวฟูจิข้ามทะเลสาบ": "Mt. Fuji view across the lake", "เจดีย์ชูเรโตะ (Arakurayama Sengen Park)": "Chureito Pagoda (Arakurayama Sengen Park)", "เจดีย์แดงคู่ฟูจิ ขึ้นบันได ~400 ขั้น": "Red pagoda with Mt. Fuji behind, ~400 steps", "มื้อเที่ยงแถวคาวากุจิโกะ": "Lunch around Kawaguchiko", "กินเส้นโฮโตะ เช็คว่าทัวร์รวมอาหารกลางวันไหม": "Try hoto noodles. Check whether the tour includes lunch", "หมู่บ้านโอชิโนะฮักไก": "Oshino Hakkai village", "บ่อน้ำใส บ้านหลังคามุงจาก ส่วนใหญ่ทัวร์ให้เวลาราว 1 ชม.": "Clear spring ponds and thatched-roof houses. Tours usually allow about 1 h", "โอชิโนะฮักไก": "Oshino Hakkai", "~2-3 ชม.": "~2-3 h", "ลำดับจุดแวะและเวลาจริงขึ้นกับทัวร์ เย็นวันศุกร์อาจรถติด ถึงช้ากว่า 18:30 ได้ 30-60 นาที": "Actual stops and times depend on the tour. Friday evening traffic can mean arriving 30-60 min after 18:30", "ถึงชินจูกุ (จุดส่งของทัวร์)": "Arrive in Shinjuku (tour drop-off)", "จุดส่งทัวร์ (ชินจูกุ)": "Tour drop-off (Shinjuku)", "อยู่ B2F ตึก Seibu Shinjuku Ekimae ทางเข้าอยู่ทางเดินใต้ดิน": "Seibu Shinjuku Ekimae building B2F, entrance from the underground passage", "มื้อเย็น: Gyukatsu Motomura": "Dinner: Gyukatsu Motomura", "กิวคัตสึย่างบนหินร้อน เปิด 11:00-22:00 คิวยาว ควรจองล่วงหน้า กินเสร็จเดินกลับโรงแรม 2-3 นาที": "Beef katsu grilled on a hot stone. Open 11:00-22:00, long queues, book ahead. 2-3 min walk back to the hotel", "เสาร์ 5 Dec (Sat)": "Sat 5 Dec", "เมจิ + ฮาราจูกุ + โอโมเตะซันโด + ชิบูย่า": "Meiji Jingu + Harajuku + Omotesando + Shibuya", "ศาลเจ้าเมจิ": "Meiji Jingu Shrine", "เดินไป JR ชินจูกุ แล้ว JR Yamanote": "Walk to JR Shinjuku, then JR Yamanote", "~20 นาทีรวมเดิน": "~20 min incl. walking", "ทางเข้าศาลเจ้าอยู่ข้างสถานี Harajuku": "The shrine entrance is next to Harajuku Station", "ไปเช้าก่อนคนเยอะ": "Go early before the crowds", "ถนนทาเคชิตะ ฮาราจูกุ": "Takeshita Street, Harajuku", "วันเสาร์คนแน่น": "Packed on Saturdays", "ถนนทาเคชิตะ": "Takeshita Street", "สถานี Omotesando": "Omotesando Station", "เดินเส้นโอโมเตะซันโด": "Walk along Omotesando", "Ginza (สีส้ม)": "Ginza (orange)", "~2 นาที": "~2 min", "ลงแล้วเดินต่อ ~5 นาที": "Then walk ~5 min", "ถนนต้นแปะก๊วย Jingu Gaien": "Jingu Gaien Ginkgo Avenue", "ใบไม้เหลือง": "Yellow ginkgo leaves", "โอโมเตะซันโด": "Omotesando", "มื้อเที่ยงและคาเฟ่": "Lunch and cafés", "เบเกอรี่สไตล์อเมริกัน ครอฟเฟิล โดนัท แครอทเค้ก อยู่ Jingumae 6 ใกล้ Cat Street เปิด 09:00-21:00 (ปิดวันพฤหัสฯ)": "American-style bakery: croffles, donuts, carrot cake. Jingumae 6 near Cat Street. Open 09:00-21:00 (closed Thursdays)", "ชิบูย่า": "Shibuya", "เดิน หรือ Ginza (สีส้ม)": "Walk or Ginza (orange)", "~15 นาทีถ้าเดิน": "~15 min on foot", "ออกทางออก Hachiko ไปครอสซิ่ง": "Use the Hachiko Exit for the crossing", "ชิบูย่าครอสซิ่ง": "Shibuya Scramble Crossing", "ดูจากชั้นบน Starbucks หรือ Magnet": "Watch from upstairs at Starbucks or Magnet", "ทางขึ้น Shibuya Sky อยู่ชั้น 14": "Shibuya Sky entrance is on 14F", "อยู่ B2F ตึก Shibuya Scramble Square ซื้อมัทฉะก่อนขึ้นไปดูวิว เปิด 10:00-21:00": "Shibuya Scramble Square B2F. Grab a matcha before going up. Open 10:00-21:00", "ทันพระอาทิตย์ตก ประมาณ 16:30 วันเสาร์บัตรเต็มเร็ว จองล่วงหน้า": "In time for sunset around 16:30. Saturday tickets sell out fast, book ahead", "Kosyu Ichiba ชินจูกุ": "Kosyu Ichiba, Shinjuku", "~7 นาที + เดิน ~5 นาที": "~7 min + ~5 min walk", "ออก West Exit เดินไปร้าน (Nishi-Shinjuku 1-12-7)": "Take the West Exit and walk to the restaurant (Nishi-Shinjuku 1-12-7)", "มื้อเย็น: Kosyu Ichiba (広州市場)": "Dinner: Kosyu Ichiba (広州市場)", "ร้านเกี๊ยวน้ำ เปิด 10:50-23:00 สั่ง ワンタン (麺なし) ไม่ใส่เส้น ได้เกี๊ยว ~14 ลูก เลือกซุป 塩 (ใส) หรือ 醤油 (เข้ม) ลองซอสหอมใหญ่เปรี้ยวหวาน + น้ำมันพริกที่โต๊ะ เตรียมเงินสด/PayPay เผื่อไม่รับบัตร": "Wonton soup shop, open 10:50-23:00. Order ワンタン (麺なし) without noodles for ~14 wontons. Pick 塩 (clear) or 醤油 (soy) broth. Try the sweet-sour onion sauce and chilli oil on the table. Bring cash/PayPay in case cards aren't accepted", "เดินลอดใต้ทางรถไฟไปฝั่ง East Exit แล้วเข้าคาบุกิโจ คืนนี้พักเร็ว พรุ่งนี้ออก 08:00": "Walk under the tracks to the East Exit side and into Kabukicho. Early night, leaving at 08:00 tomorrow", "อาทิตย์ 6 Dec (Sun)": "Sun 6 Dec", "กิโมโนอาซากุสะ + อากิบะ + อุเอโนะ + Skytree": "Kimono in Asakusa + Akiba + Ueno + Skytree", "ร้านเช่ากิโมโน อาซากุสะ": "Kimono rental shop, Asakusa", "เดินไป Shinjuku-nishiguchi แล้ว Oedo (ฝั่ง Ryogoku / Daimon)": "Walk to Shinjuku-nishiguchi, then Oedo (towards Ryogoku / Daimon)", "~45 นาทีรวมเดิน": "~45 min incl. walking", "จาก Kuramae เดินไปร้าน ~10 นาที": "~10 min walk from Kuramae to the shop", "ร้านเช่ากิโมโน แต่งตัว ทำผม": "Kimono rental: dressing and hair", "ใช้เวลา 30-60 นาที จองรอบแรก เลือกแพ็กเกจที่มีเสื้อคลุม": "Takes 30-60 min. Book the first slot and pick a package with a coat", "วัดเซ็นโซจิ + ประตูคามินาริมง + Nakamise": "Sensoji Temple + Kaminarimon + Nakamise", "ถ่ายรูปชุดกิโมโนช่วงเช้าก่อนคนแน่น": "Kimono photos in the morning before the crowds", "Hatoya Asakusa (มัทฉะ)": "Hatoya Asakusa (matcha)", "เดินจากเซ็นโซจิไม่กี่นาที เปิด 09:00-18:00 คิวอาจรอ 15-30 นาที ระวังเปื้อนชุดกิโมโน": "A few minutes' walk from Sensoji. Open 09:00-18:00, queue may be 15-30 min. Careful not to stain the kimono", "มื้อเที่ยง: Ramen Hayashida Asakusa": "Lunch: Ramen Hayashida Asakusa", "ราเมนโชยุ + ข้าววากิวหน้าไข่แดง สั่งที่ตู้หน้าร้าน เปิด 10:00-23:00 ขอผ้ากันเปื้อน (紙エプロン) ก่อนกิน": "Shoyu ramen + wagyu rice bowl with egg yolk. Order at the ticket machine. Open 10:00-23:00. Ask for a paper apron (紙エプロン) before eating", "ริมแม่น้ำสุมิดะ": "Sumida Riverside", "ถ่ายรูปชุดกิโมโน มี Skytree เป็นฉากหลัง": "Kimono photos with Skytree in the background", "คืนชุดกิโมโน": "Return the kimono", "คืนก่อนเวลาปิดของร้าน ส่วนใหญ่ 16:30-17:30": "Return before the shop closes, usually 16:30-17:30", "อาซากุสะ": "Asakusa", "อากิฮาบาระ": "Akihabara", "สถานี TX อาซากุสะอยู่คนละที่กับสถานีสาย Ginza เดินไม่กี่นาที": "The TX Asakusa station is separate from the Ginza Line station, a few minutes' walk", "ทันถนนคนเดิน Chuo-dori ช่วงบ่ายวันอาทิตย์": "Catch the Chuo-dori pedestrian zone on Sunday afternoon", "ตลาด Ameyoko": "Ameyoko Market", "เดิน หรือ JR Yamanote": "Walk or JR Yamanote", "เดินเลียบทางรถไฟ JR ขึ้นเหนือ": "Walk north along the JR tracks", "ตลาด Ameyoko อุเอโนะ": "Ameyoko Market, Ueno", "เดินชมตลาด สตรีทฟู้ด": "Browse the market and street food", "เมนชิคัตสึที่หน้าต่างหน้าร้าน กินเป็นของว่าง ในร้านรับบัตร หน้าต่างพกเงินสดสำรอง": "Menchi-katsu from the shop's front window as a snack. Cards accepted inside, bring cash for the window", "Ginza (สีส้ม) ไป Asakusa แล้ว Tobu Skytree Line": "Ginza (orange) to Asakusa, then Tobu Skytree Line", "~25 นาที": "~25 min", "ขึ้นสาย Ginza ที่สถานี Ueno เปลี่ยนเป็น Tobu ที่ Asakusa": "Board the Ginza Line at Ueno, change to Tobu at Asakusa", "ไฟประดับ 16:00-23:00 ต้นคริสต์มาส 8 เมตร Starry Dome เข้าฟรี": "Illuminations 16:00-23:00, 8 m Christmas tree, Starry Dome. Free entry", "จุดชมวิว Tokyo Skytree ตอนกลางคืน": "Tokyo Skytree observation deck at night", "ซื้อบัตรออนไลน์ล่วงหน้า รอบประมาณ 18:30 บนชั้นชมวิวมีจุดถ่ายรูปธีมคริสต์มาส": "Buy tickets online, slot around 18:30. Christmas photo spots on the deck", "มื้อเย็น: Christmas Market": "Dinner: Christmas Market", "Sky Arena ชั้น 4 เปิด 11:00-22:00 สั่งอาหารรอบสุดท้าย 21:00": "Sky Arena 4F, open 11:00-22:00, last food orders 21:00", "Hanzomon (สีม่วง) ไป Kudanshita แล้ว Toei Shinjuku": "Hanzomon (purple) to Kudanshita, then Toei Shinjuku", "40-45 นาที": "40-45 min", "เดินต่อไปโรงแรม ~8 นาที เช็คเส้นทางใน Google Maps อีกครั้ง": "Walk ~8 min to the hotel. Double-check the route in Google Maps", "จันทร์ 7 Dec (Mon)": "Mon 7 Dec", "สึกิจิ + ฮามะริคิว + กินซ่า + บินกลับ": "Tsukiji + Hamarikyu + Ginza + fly home", "เช็คเอาท์ ฝากกระเป๋าที่โรงแรม": "Check out and leave bags at the hotel", "กินซ่า": "Ginza", "เดินไปสถานีชินจูกุ แล้ว Marunouchi (สีแดง)": "Walk to Shinjuku Station, then Marunouchi (red)", "~18 นาที": "~18 min", "เดินจากโรงแรมไปชานชาลา Marunouchi ~8 นาที": "~8 min walk from the hotel to the Marunouchi platform", "ตลาดนอกสึกิจิ": "Tsukiji Outer Market", "Hibiya (สีเทา)": "Hibiya (grey)", "~3 นาที": "~3 min", "ออกทางออก 1 ตลาดนอกอยู่ใกล้ทางออก": "Use Exit 1, the outer market is right there", "มื้อเช้าซีฟู้ด เดินเล่นในตลาด": "Seafood breakfast and a stroll through the market", "Tsukiji Gindaco (ทาโกะยากิ)": "Tsukiji Gindaco (takoyaki)", "สาขาในตลาดนอกสึกิจิ เปิด 10:00-19:00 ไปตอนร้านเปิดคิวไม่ยาว": "Branch in Tsukiji Outer Market, open 10:00-19:00. Short queue at opening", "ตลาดสึกิจิ": "Tsukiji Market", "สวนฮามะริคิว": "Hamarikyu Gardens", "10-15 นาที": "10-15 min", "สวนเปิด 09:00 มีค่าเข้า": "Garden opens 09:00, entry fee", "ดื่มมัทฉะในโรงน้ำชากลางสระ": "Matcha at the teahouse in the middle of the pond", "Uniqlo, Muji, Itoya ของฝากชิ้นสุดท้าย + มื้อเที่ยงเบาๆ ออกจากกินซ่าไม่เกิน 12:45": "Uniqlo, Muji, Itoya for last souvenirs + a light lunch. Leave Ginza by 12:45", "Marunouchi (สีแดง)": "Marunouchi (red)", "เดินต่อไปโรงแรม ~8 นาที": "Walk ~8 min to the hotel", "กลับโรงแรม รับกระเป๋า": "Back to the hotel, collect bags", "ชานชาลา N'EX สถานี JR ชินจูกุ": "N'EX platform, JR Shinjuku Station", "เข้าทาง East Exit ตามป้าย Narita Express ใช้ลิฟต์เพราะมีกระเป๋า": "Enter via the East Exit and follow the Narita Express signs. Use the lifts with luggage", "สนามบินนาริตะ T2": "Narita Airport T2", "ลงที่ Terminal 2·3 ไม่ใช่สถานีสุดท้าย (Terminal 1) ถึง ~16:00-16:30": "Get off at Terminal 2·3, not the last stop (Terminal 1). Arrive ~16:00-16:30", "ถึงนาริตะ Terminal 2 เช็คอิน โหลดกระเป๋า": "Arrive at Narita Terminal 2, check in and drop bags", "ช้าสุดไม่เกิน 17:30 เคาน์เตอร์ปิดราว 18:45": "By 17:30 at the latest. Counters close around 18:45", "ไฟลต์ XJ607 นาริตะ → ดอนเมือง": "Flight XJ607 Narita → Don Mueang", "ถึงดอนเมือง 01:10 วันที่ 8 Dec": "Arrive at Don Mueang 01:10 on 8 Dec", "การจอง": "Bookings", "จองตั๋วเครื่องบิน": "Book flights", "จองโรงแรม": "Book hotel", "APA Hotel Shinjuku-Kabukicho Tower รวม 5 คืน": "APA Hotel Shinjuku-Kabukicho Tower, 5 nights", "ตั๋ว Tokyo DisneySea 1-Day Passport (2 ใบ)": "Tokyo DisneySea 1-Day Passport (2 tickets)", "ซื้อผ่านเว็บหรือแอปทางการ ราคาเปลี่ยนตามวัน": "Buy on the official website or app. Price varies by date", "ทัวร์ฟูจิ 1 วัน จากชินจูกุ (2 คน)": "Mt. Fuji day tour from Shinjuku (2 people)", "จองผ่าน Klook หรือ KKday เลือกจุดนัดฝั่งชินจูกุ เช็คว่ารวมอาหารกลางวันไหม และยกเลิกหรือเลื่อนวันฟรีได้ 24 ชม. ล่วงหน้า": "Book on Klook or KKday with a Shinjuku meeting point. Check whether lunch is included and that you can cancel or change the date free up to 24 h before", "Shibuya Sky รอบ 15:45 (2 ใบ)": "Shibuya Sky 15:45 slot (2 tickets)", "วันเสาร์เต็มเร็ว จองทันทีที่เปิดขาย": "Saturdays sell out fast, book as soon as tickets open", "ตั๋ว N'EX ขาไป": "N'EX ticket, outbound", "นาริตะ ไป ชินจูกุ": "Narita to Shinjuku", "ตั๋ว N'EX ขากลับ": "N'EX ticket, return", "ชินจูกุ ไป นาริตะ รอบประมาณ 14:30": "Shinjuku to Narita, around 14:30", "ซื้อ Welcome Suica (2 ใบ)": "Buy Welcome Suica (2 cards)", "ซื้อที่ JR East Travel Service Center สถานี Airport Terminal 2·3 (ชั้น B1) ค่ามัดจำ ¥500 ต่อใบ ถ้าหมด ซื้อที่สถานี JR ชินจูกุแทน": "Buy at the JR East Travel Service Center, Airport Terminal 2·3 station (B1). ¥500 deposit each. If sold out, buy at JR Shinjuku Station", "โหลดแอป Tokyo Disney Resort": "Download the Tokyo Disney Resort app", "ก่อน 3 Dec": "Before 3 Dec", "ดูเวลารอคิว และซื้อ Premier Access": "Check wait times and buy Premier Access", "เช่ากิโมโนอาซากุสะ (2 ชุด)": "Kimono rental in Asakusa (2 sets)", "จองรอบ 09:00 เช็คว่ารวมทำผม รองเท้า เสื้อคลุม และเวลาคืนชุด": "Book the 09:00 slot. Check whether hair, shoes, coat and return time are included", "บัตรขึ้น Tokyo Skytree รอบค่ำ (2 ใบ)": "Tokyo Skytree evening tickets (2)", "ซื้อออนไลน์ เลือกรอบประมาณ 18:30 ไฟคริสต์มาสและตลาดคริสต์มาสเข้าฟรี": "Buy online, slot around 18:30. Christmas lights and market are free", "สิ่งที่ต้องเตรียม": "Things to prepare", "พาสปอร์ตอายุเหลือมากกว่า 6 เดือน": "Passport valid for more than 6 months", "ก่อนบิน": "Before the flight", "คนไทยเที่ยวญี่ปุ่นไม่เกิน 15 วันไม่ต้องขอวีซ่า": "Thai citizens don't need a visa for stays up to 15 days", "ประกันการเดินทาง": "Travel insurance", "เก็บไฟล์กรมธรรม์ไว้ในมือถือ": "Keep the policy file on your phone", "เก็บใบจองทั้งหมดไว้ในมือถือ": "Keep all bookings on your phone", "ไฟลต์ โรงแรม DisneySea voucher ทัวร์ฟูจิ Shibuya Sky และรูปหน้าพาสปอร์ต": "Flights, hotel, DisneySea, Mt. Fuji tour voucher, Shibuya Sky and a photo of the passport page", "กรอก Visit Japan Web": "Complete Visit Japan Web", "กรอกข้อมูลพาสปอร์ต ไฟลต์ ที่พัก ให้ครบทั้ง 2 คน แล้วเก็บ QR code ไว้ยื่นที่ ตม. และศุลกากร": "Enter passport, flight and hotel details for both travellers and keep the QR codes for immigration and customs", "เช็คอินออนไลน์ + ชั่งน้ำหนักกระเป๋า": "Online check-in + weigh luggage", "1 วันก่อนบิน": "1 day before the flight", "เผื่อน้ำหนักไว้ใส่ของฝากขากลับ": "Leave room for souvenirs on the way back", "แลกเงินเยนสด": "Exchange cash yen", "ร้านเล็ก ตลาด และศาลเจ้าหลายที่รับแค่เงินสด": "Many small shops, markets and shrines take cash only", "เปิดใช้บัตรเดบิต / เครดิตในต่างประเทศ": "Enable debit / credit cards for overseas use", "เปิดในแอปธนาคาร หรือใช้ Travel Card": "In the bank app, or use a Travel Card", "eSIM หรือ Pocket WiFi": "eSIM or Pocket WiFi", "ติดตั้ง eSIM ให้เสร็จตั้งแต่อยู่ไทย": "Install the eSIM before leaving Thailand", "โหลดแผนที่ออฟไลน์ใน Google Maps": "Download offline Google Maps", "โตเกียว และคาวากุจิโกะ": "Tokyo and Kawaguchiko", "Google Translate + โหลดภาษาญี่ปุ่นออฟไลน์": "Google Translate + offline Japanese", "ใช้กล้องแปลเมนูและป้ายได้": "Use the camera to translate menus and signs", "ปลั๊กแปลงสำหรับญี่ปุ่น": "Plug adapter for Japan", "จัดกระเป๋า": "Packing", "ญี่ปุ่นใช้ปลั๊กขาแบน 2 ขา ไฟ 100V": "Japan uses 2-pin flat plugs, 100V", "พาวเวอร์แบงก์ + สายชาร์จ": "Power bank + charging cables", "พาวเวอร์แบงก์ต้องถือขึ้นเครื่อง ห้ามใส่กระเป๋าโหลด": "Power banks must go in carry-on, not checked bags", "เสื้อกันหนาว + เสื้อตัวในกันหนาว": "Coat + thermal base layers", "โตเกียวต้นธันวาคมประมาณ 6-15°C ใส่เป็นชั้นๆ ถอดง่าย": "Early December in Tokyo is about 6-15°C. Wear layers that are easy to take off", "ถุงมือ หมวก ผ้าพันคอ": "Gloves, hat, scarf", "ฟูจิตอนเช้าอาจใกล้ 0°C และ DisneySea ตอนค่ำลมแรง": "Fuji can be near 0°C in the morning and DisneySea is windy at night", "รองเท้าที่เดินสบาย": "Comfortable walking shoes", "ทริปนี้เดินวันละหลายกิโล ไม่ควรใช้รองเท้าคู่ใหม่": "Lots of walking every day, don't bring new shoes", "ลิปมัน ครีมทาผิว": "Lip balm, moisturiser", "อากาศหน้าหนาวที่ญี่ปุ่นแห้งมาก": "Winter air in Japan is very dry", "ยาประจำตัว + ยาสามัญ": "Personal and basic medicines", "ยาบางชนิด เช่น ยาแก้หวัดบางตัว ห้ามนำเข้าญี่ปุ่น เช็คก่อนจัดกระเป๋า": "Some medicines, such as certain cold remedies, can't be brought into Japan. Check before packing", "กระเป๋าใส่เหรียญ": "Coin purse", "ที่ญี่ปุ่นได้เงินทอนเป็นเหรียญเยอะ": "You get a lot of change in coins in Japan", "ถุงผ้า + ถุงใส่ขยะ": "Tote bag + rubbish bags", "ถุงที่ร้านต้องซื้อ และถังขยะตามทางหายาก": "Shops charge for bags and public bins are rare", "กระเป๋าสะพายใบเล็ก": "Small shoulder bag", "ใช้วัน DisneySea และวันทัวร์ฟูจิ": "For DisneySea day and the Fuji tour day", "พกพาสปอร์ตตัวจริงตอนช้อป": "Carry your actual passport when shopping", "ระหว่างทริป": "During the trip", "ใช้วัน DisneySea และวันไปฟูจิ": "For DisneySea day and Fuji day", "เช็คพยากรณ์อากาศฟูจิ": "Check the weather forecast for Fuji", "ถ้าเมฆมาก ติดต่อทัวร์เรื่องเลื่อนวัน": "If it's cloudy, contact the tour about changing the date", "ปักหมุดจุดนัดทัวร์ฟูจิ": "Pin the Fuji tour meeting point", "ดูจุดนัดและเวลาใน voucher พรุ่งนี้ออกจากโรงแรม 07:15": "Check the meeting point and time on the voucher. Leave the hotel at 07:15 tomorrow", "สิ่งที่ต้องเตรียมจากบ้าน": "Things to bring from home", "กระเป๋าเดินทางอันใหญ่": "Large suitcase", "ยืมกระเป๋า carry on พี่นุ๊ก": "Borrow carry-on bag from P'Nook", "ยืมชุดพี่นุ๊ก": "Borrow clothes from P'Nook", "ตัวแปลงสายไฟ": "Power adapter", "ยืมกระเป๋า longchamp สีดำพี่นุ๊ก": "Borrow black Longchamp bag from P'Nook", "ขาไป": "Outbound", "ขากลับ": "Return", "ไม่เกิน 17:30": "By 17:30", "ประตูขึ้นเครื่องปิดก่อนออก ~20 นาที": "Gate closes ~20 min before departure", "ถึงดอนเมือง 8 Dec": "Arrives Don Mueang 8 Dec"};
+const MAPS = q => "https://www.google.com/maps/search/?api=1&query=" + q;
+const DIR = (o,d,m) => `https://www.google.com/maps/dir/?api=1&origin=${o}&destination=${d}&travelmode=${m}`;
+const H = "APA+HOTEL+SHINJUKU-KABUKICHO+TOWER";
+const WX = "Shinjuku+Station+West+Exit";
+// stop: time, name, note, map query, extra {pre, tip}
+const S = (t,n,d,q,x={}) => ({k:"s",t,n,d,q,...x});
+// leg: time|"", from, to, how, alight, stops, duration, note, route link, mode
+const L = (t,f,to,how,at,st,dur,d,link,m="train",back=false) => ({k:"l",t,f,to,how,at,st,dur,d,link,m,back});
+
+const TIP_ARRIVE = {title:"💳 ที่สนามบินนาริตะ", items:[
+  "ซื้อ Suica 2 ใบ ที่ JR East Travel Service Center สถานี Airport Terminal 2·3 (ชั้น B1) ค่ามัดจำ ¥500 ต่อใบ",
+  "รับตั๋ว N'EX ขาไปที่เดียวกัน ทุกที่นั่งต้องจอง",
+  "ถ้า Suica หมด ซื้อที่สถานี JR ชินจูกุแทน",
+  "กรอก Visit Japan Web ให้ครบ 2 คนก่อนบิน เก็บ QR ไว้ยื่น ตม."]};
+
+const DAYS = [
+ {id:"day-2",n:1,th:"พุธ 2 Dec (Wed)",title:"ถึงโตเกียว + ชินจูกุ + Marunouchi Bright Holiday",items:[
+  S("22:30","สนามบิน: ดอนเมือง Terminal 1","เช็คอิน โหลดกระเป๋า ช้าสุดไม่เกิน 23:30 เคาน์เตอร์ปิดราว 00:40","Don+Mueang+International+Airport",{pre:"คืน 1 Dec"}),
+  S("01:40","ไฟลต์ XJ602 ดอนเมือง → นาริตะ","ประตูขึ้นเครื่องปิดก่อนเครื่องออกประมาณ 20 นาที","Don+Mueang+International+Airport"),
+  S("09:45","ถึงนาริตะ Terminal 2","ผ่าน ตม. รับกระเป๋า แล้วลงไปสถานีใต้อาคาร Terminal 2","Narita+Airport+Terminal+2",{tip:TIP_ARRIVE}),
+  L("11:00","นาริตะ T2","สถานี JR ชินจูกุ","JR Narita Express (N'EX)","Shinjuku","ตรง","80-90 นาที","ขึ้นที่สถานี Airport Terminal 2·3 (空港第2ビル) ใต้อาคาร ทุกที่นั่งต้องจอง",DIR("Narita+Airport+Terminal+2","Shinjuku+Station+Tokyo","transit")),
+  L("","สถานี JR ชินจูกุ","โรงแรม","เดิน","","","7-10 นาที","ออก East Exit แล้วเดินขึ้นเหนือเข้าคาบุกิโจ ใช้ลิฟต์เพราะมีกระเป๋า",DIR("Shinjuku+Station+East+Exit",H,"walking"),"walk"),
+  S("13:00","ฝากกระเป๋าที่ APA Hotel Shinjuku-Kabukicho Tower","เช็คอินจริงตามเวลาของโรงแรม",H),
+  L("","โรงแรม","Shaburakutei","เดิน","","","1-3 นาที","Kabukicho 1-9-5 ชั้น 1",DIR(H,"Shaburakutei+Shinjuku+Kabukicho&destination_place_id=ChIJ0w84U2qNGGAR8CyVacgOc1Q","walking"),"walk"),
+  S("13:15","มื้อเที่ยง: Shaburakutei Kabukicho","ชาบูชาบู / ซุกี้ยากี้ หม้อใครหม้อมัน เปิด 11:30","Shaburakutei+Shinjuku+Kabukicho&query_place_id=ChIJ0w84U2qNGGAR8CyVacgOc1Q"),
+  L("","Shaburakutei","สวนชินจูกุเกียวเอ็น","เดิน","","","15-20 นาที","เดินผ่านชินจูกุ-ซันโจเมะ ไปประตู Shinjuku Gate",DIR("Shaburakutei+Shinjuku+Kabukicho&origin_place_id=ChIJ0w84U2qNGGAR8CyVacgOc1Q","Shinjuku+Gyoen+National+Garden","walking"),"walk"),
+  S("14:45","สวนชินจูกุเกียวเอ็น","ใบไม้แดง หน้าหนาวสวนปิดราว 16:00-16:30 เช็คเวลาก่อนไป","Shinjuku+Gyoen+National+Garden"),
+  L("","สวนชินจูกุเกียวเอ็น","โรงแรม","เดิน","","","15-20 นาที","",DIR("Shinjuku+Gyoen+National+Garden",H,"walking"),"walk"),
+  S("16:15","เช็คอิน งีบพัก","พรุ่งนี้ไป DisneySea ทั้งวัน",H),
+  L("17:30","โรงแรม","สถานีโตเกียว","เดินไป JR ชินจูกุ แล้ว JR Chuo Rapid (สีส้ม)","Tokyo","4","~25 นาทีรวมเดิน","ขึ้นขบวน Rapid ไม่ต้องเปลี่ยนสาย",DIR(H,"Tokyo+Station","transit")),
+  L("","สถานีโตเกียว","Marunouchi Bright Holiday","เดิน","","","~5 นาที","ออกฝั่ง Marunouchi งานกระจายอยู่ตึกรอบสถานี",DIR("Tokyo+Station","Marunouchi+Naka-dori+Tokyo","walking"),"walk"),
+  S("18:00","Marunouchi Bright Holiday (ธีม Harry Potter)","Hogwarts Snow Tree, Hogwarts Winter Walk, Pop-up Shop เปิด 11:00-21:00 เช็ครอบโชว์หิมะก่อนไป","Marunouchi+Naka-dori+Tokyo"),
+  S("19:30","มื้อเย็น: Tonkatsu Suzuki","อยู่ Gransta Yaekita ชั้น 1 ในสถานีโตเกียว (นอกประตูตรวจตั๋ว) ปิด 21:30 ควรถึงไม่เกิน 20:45 สั่งสันนอก (ロース) ฉ่ำกว่าสันใน เติมข้าวได้ มีเมนูอังกฤษ","Tonkatsu+Suzuki+Tokyo+Station&query_place_id=ChIJGeYlX_mLGGARTlIbc1yzJb4"),
+  L("","สถานีโตเกียว","สถานี JR ชินจูกุ","JR Chuo Rapid (สีส้ม)","Shinjuku","4","~15 นาที","ออก East Exit ตึก Bic Camera อยู่หน้าทางออก",DIR("Tokyo+Station",H,"transit")),
+  S("20:30","ช้อป: UNIQLO Shinjuku Honten + GU","ตึก Bic Camera: UNIQLO ชั้น 1-3, GU ชั้น 7 เปิดถึง 22:00 ซื้อ HEATTECH ไว้ใส่ไป DisneySea","UNIQLO+Shinjuku+Honten&query_place_id=ChIJCT-INACNGGARWLBECvtQoNI",{tip:{title:"🛍️ Tax-free",items:["ซื้อครบ ¥5,500 ต่อร้านได้ tax-free","ต้องพกพาสปอร์ตตัวจริง"]}}),
+  S("21:45","เดินกลับโรงแรม (ถ้าไหว แวะ Omoide Yokocho)","เดินจากร้านไปโรงแรม ~7 นาที พรุ่งนี้ไป DisneySea ทั้งวัน อย่านอนดึก",H),
+  L("","Omoide Yokocho","โรงแรม","เดิน","","","5-7 นาที","อยู่ใกล้ทางออกฝั่งตะวันตกของสถานีชินจูกุ",DIR("Omoide+Yokocho+Shinjuku",H,"walking"),"walk")]},
+
+ {id:"day-3",n:2,th:"พฤหัส 3 Dec (Thu)",title:"Tokyo DisneySea ทั้งวัน",items:[
+  L("07:15","โรงแรม","สถานี Shinjuku-nishiguchi","เดิน","","","6-8 นาที","ทั้งเส้นทางไป DisneySea ประมาณ 50-60 นาที",DIR(H,"Tokyo+DisneySea","transit"),"walk"),
+  L("","Shinjuku-nishiguchi (E-01)","Tsukishima","Oedo (ฝั่ง Ryogoku / Daimon)","Tsukishima (E-16)","15","~30 นาที","",null),
+  L("","Tsukishima","Shin-Kiba","Yurakucho (สีทอง)","Shin-Kiba","","","",null),
+  L("","Shin-Kiba","Maihama","JR Keiyo","Maihama","","","",null),
+  L("","Maihama","Tokyo DisneySea","Disney Resort Line (โมโนเรล)","Tokyo DisneySea Station","","","ค่าโดยสารแยก แตะ Suica ได้",null),
+  S("08:30","รอหน้าประตู Tokyo DisneySea","ถึงก่อนสวนเปิด เล่นเครื่องดังตอนคิวยังสั้น","Tokyo+DisneySea",{tip:{title:"📱 แอป Tokyo Disney Resort",items:["ดูเวลารอคิวแบบสด","ซื้อ Premier Access ในแอป"]}}),
+  S("เช้า","Fantasy Springs","โซนที่คนเยอะสุด เช็คแอปตั้งแต่เปิดสวน","Fantasy+Springs+Tokyo+DisneySea"),
+  S("ทั้งวัน","เครื่องเล่นหลักและโชว์","Soaring, Toy Story Mania, Journey to the Center of the Earth","Tokyo+DisneySea"),
+  S("ค่ำ","โชว์กลางคืน แล้วกลับโรงแรม","อากาศริมทะเลหนาว ใส่เสื้อหนา กลับโรงแรมใช้เส้นทางเดิมย้อนกลับ ประมาณ 60-70 นาที","Tokyo+DisneySea",{tip:{title:"🌙 ขากลับหลังโชว์",items:["หลังโชว์กลางคืนคนแน่นมาก เผื่อเวลาอีก 15-20 นาที","เติม Suica ก่อนออกจากสวน จะได้ไม่ต้องต่อคิวเติมเงินที่สถานี","ที่ Maihama ขึ้น JR Keiyo ขบวนไปทาง Tokyo"]}}),
+  L("","Tokyo DisneySea","Maihama","Disney Resort Line (โมโนเรล)","Resort Gateway Station (หน้า JR Maihama)","","~10 นาที","ขึ้นที่ Tokyo DisneySea Station หน้าสวน",DIR("Tokyo+DisneySea",H,"transit"),"train",true),
+  L("","Maihama","Shin-Kiba","JR Keiyo (ฝั่ง Tokyo)","Shin-Kiba","2","~5 นาที","ขึ้นขบวนไปทาง Tokyo อย่าขึ้นฝั่ง Soga / Chiba",null,"train",true),
+  L("","Shin-Kiba","Tsukishima","Yurakucho (สีทอง)","Tsukishima (Y-21)","3","~6 นาที","เปลี่ยนจาก JR เป็น Metro ในสถานี Shin-Kiba แตะ Suica ออกแล้วเข้าใหม่",null,"train",true),
+  L("","Tsukishima (E-16)","Shinjuku-nishiguchi","Oedo (ฝั่ง Tochomae)","Shinjuku-nishiguchi (E-01)","15","~30 นาที","ดูป้ายฝั่ง Tochomae / Shinjuku",null,"train",true),
+  L("","Shinjuku-nishiguchi","โรงแรม","เดิน","","","6-8 นาที","แวะ Gindaco ตึก Shinjuku Toho ก่อนถึงโรงแรมได้ เปิดถึง 23:00",DIR("Shinjuku-nishiguchi+Station",H,"walking"),"walk",true),
+  S("ดึก","ทาโกะยากิ: Gindaco Highball Tavern","ตึก Shinjuku Toho (หัวก็อดซิล่า) เดินจากโรงแรม 1-2 นาที เปิดถึง 23:00 นั่งกินต้องสั่งเครื่องดื่มคนละ 1 แก้ว หรือซื้อกลับไปกินที่โรงแรม","Gindaco+Highball+Tavern+Shinjuku+Toho+Building&query_place_id=ChIJVVVVVdiMGGAR-3eFgYmUvQQ")]},
+
+ {id:"day-4",n:3,th:"ศุกร์ 4 Dec (Fri)",title:"ทัวร์ฟูจิ 1 วัน: ชูเรโตะ + คาวากุจิโกะ + โอชิโนะฮักไก",items:[
+  L("07:15","โรงแรม","จุดนัดทัวร์ (ชินจูกุ West Exit)","เดิน","","","~15 นาที","ลอดใต้ทางรถไฟจากฝั่ง East Exit ไป West Exit เช็คจุดนัดจริงใน voucher",DIR(H,WX,"walking"),"walk"),
+  S("07:45","จุดนัดทัวร์ฟูจิ","ทัวร์ส่วนใหญ่นัด 07:30-07:45 แถว West Exit เช่นหน้า SMBC Shinjuku Nishiguchi ไปก่อนเวลา 10-15 นาที รถไม่รอ",WX,{tip:{title:"🚌 ทัวร์ฟูจิ (ยังไม่ได้จอง)",items:["จอง Klook หรือ KKday เลือกจุดนัดฝั่งชินจูกุ","เช็คว่ารวมอาหารกลางวันไหม","เลือกแบบยกเลิกหรือเลื่อนฟรี 24 ชม. ล่วงหน้า เผื่อวันนั้นเมฆมาก","หลังจองแล้ว แก้จุดนัดและเวลาให้ตรง voucher"]}}),
+  L("08:00","ชินจูกุ","สวนโออิชิ คาวากุจิโกะ","รถทัวร์","","ตรง","~2 ชม.","ระหว่างทางแวะพักห้องน้ำ วันนี้ไม่ต้องใช้ Suica",null,"bus"),
+  S("10:00","สวนโออิชิ ริมทะเลสาบคาวากุจิโกะ","วิวฟูจิข้ามทะเลสาบ","Oishi+Park+Kawaguchiko"),
+  S("11:00","เจดีย์ชูเรโตะ (Arakurayama Sengen Park)","เจดีย์แดงคู่ฟูจิ ขึ้นบันได ~400 ขั้น","Chureito+Pagoda"),
+  S("12:30","มื้อเที่ยงแถวคาวากุจิโกะ","กินเส้นโฮโตะ เช็คว่าทัวร์รวมอาหารกลางวันไหม","Lake+Kawaguchiko"),
+  S("14:00","หมู่บ้านโอชิโนะฮักไก","บ่อน้ำใส บ้านหลังคามุงจาก ส่วนใหญ่ทัวร์ให้เวลาราว 1 ชม.","Oshino+Hakkai"),
+  L("15:30","โอชิโนะฮักไก","ชินจูกุ","รถทัวร์","","ตรง","~2-3 ชม.","ลำดับจุดแวะและเวลาจริงขึ้นกับทัวร์ เย็นวันศุกร์อาจรถติด ถึงช้ากว่า 18:30 ได้ 30-60 นาที",null,"bus"),
+  S("18:30","ถึงชินจูกุ (จุดส่งของทัวร์)","",WX),
+  L("","จุดส่งทัวร์ (ชินจูกุ)","Gyukatsu Motomura","เดิน","","","~10 นาที","อยู่ B2F ตึก Seibu Shinjuku Ekimae ทางเข้าอยู่ทางเดินใต้ดิน",DIR(WX,"Gyukatsu+Motomura+Shinjuku+Main+Branch&destination_place_id=ChIJPR5EUkCNGGARyhvN1EVWEc0","walking"),"walk"),
+  S("19:30","มื้อเย็น: Gyukatsu Motomura","กิวคัตสึย่างบนหินร้อน เปิด 11:00-22:00 คิวยาว ควรจองล่วงหน้า กินเสร็จเดินกลับโรงแรม 2-3 นาที","Gyukatsu+Motomura+Shinjuku+Main+Branch&query_place_id=ChIJPR5EUkCNGGARyhvN1EVWEc0")]},
+
+ {id:"day-5",n:4,th:"เสาร์ 5 Dec (Sat)",title:"เมจิ + ฮาราจูกุ + โอโมเตะซันโด + ชิบูย่า",items:[
+  L("08:10","โรงแรม","ศาลเจ้าเมจิ","เดินไป JR ชินจูกุ แล้ว JR Yamanote","Harajuku","2","~20 นาทีรวมเดิน","ทางเข้าศาลเจ้าอยู่ข้างสถานี Harajuku",DIR(H,"Meiji+Jingu","transit")),
+  S("08:30","ศาลเจ้าเมจิ","ไปเช้าก่อนคนเยอะ","Meiji+Jingu"),
+  S("10:00","ถนนทาเคชิตะ ฮาราจูกุ","วันเสาร์คนแน่น","Takeshita+Street+Harajuku"),
+  L("","ถนนทาเคชิตะ","สถานี Omotesando","เดิน","","","~15 นาที","เดินเส้นโอโมเตะซันโด",DIR("Takeshita+Street+Harajuku","Omotesando+Station","walking"),"walk"),
+  L("","Omotesando","Jingu Gaien","Ginza (สีส้ม)","Gaienmae (G-03)","1","~2 นาที","ลงแล้วเดินต่อ ~5 นาที",DIR("Omotesando+Station","Jingu+Gaien+Ginkgo+Avenue","transit")),
+  S("11:30","ถนนต้นแปะก๊วย Jingu Gaien","ใบไม้เหลือง","Jingu+Gaien+Ginkgo+Avenue"),
+  L("","Gaienmae","โอโมเตะซันโด","Ginza (สีส้ม)","Omotesando (G-02)","1","~2 นาที","",DIR("Gaienmae+Station","Omotesando+Station","transit")),
+  S("13:00","โอโมเตะซันโด","มื้อเที่ยงและคาเฟ่","Omotesando+Tokyo"),
+  S("14:00","The Little BAKERY Tokyo","เบเกอรี่สไตล์อเมริกัน ครอฟเฟิล โดนัท แครอทเค้ก อยู่ Jingumae 6 ใกล้ Cat Street เปิด 09:00-21:00 (ปิดวันพฤหัสฯ)","The+Little+BAKERY+Tokyo&query_place_id=ChIJq6qqqqWMGGAR2RolMxkM6wI"),
+  L("","โอโมเตะซันโด","ชิบูย่า","เดิน หรือ Ginza (สีส้ม)","Shibuya (G-01)","1","~15 นาทีถ้าเดิน","ออกทางออก Hachiko ไปครอสซิ่ง",DIR("Omotesando+Station","Shibuya+Scramble+Crossing","walking"),"walk"),
+  S("14:45","ชิบูย่าครอสซิ่ง","ดูจากชั้นบน Starbucks หรือ Magnet","Shibuya+Scramble+Crossing"),
+  L("","ชิบูย่าครอสซิ่ง","Shibuya Scramble Square","เดิน","","","~5 นาที","ทางขึ้น Shibuya Sky อยู่ชั้น 14",DIR("Shibuya+Scramble+Crossing","Shibuya+Sky","walking"),"walk"),
+  S("15:15","SACYA Matcha Cafe Stand","อยู่ B2F ตึก Shibuya Scramble Square ซื้อมัทฉะก่อนขึ้นไปดูวิว เปิด 10:00-21:00","SACYA+Matcha+Cafe+Stand+Shibuya+Scramble+Square&query_place_id=ChIJFw1BYACLGGAReUfpBxqretQ"),
+  S("15:45","Shibuya Sky","ทันพระอาทิตย์ตก ประมาณ 16:30 วันเสาร์บัตรเต็มเร็ว จองล่วงหน้า","Shibuya+Sky"),
+  L("","ชิบูย่า","Kosyu Ichiba ชินจูกุ","JR Yamanote","Shinjuku","3","~7 นาที + เดิน ~5 นาที","ออก West Exit เดินไปร้าน (Nishi-Shinjuku 1-12-7)",DIR("Shibuya+Station","Kosyu+Ichiba+Nishishinjuku&destination_place_id=ChIJ8cluRtGMGGARDNylLHscYpA","transit")),
+  S("17:15","มื้อเย็น: Kosyu Ichiba (広州市場)","ร้านเกี๊ยวน้ำ เปิด 10:50-23:00 สั่ง ワンタン (麺なし) ไม่ใส่เส้น ได้เกี๊ยว ~14 ลูก เลือกซุป 塩 (ใส) หรือ 醤油 (เข้ม) ลองซอสหอมใหญ่เปรี้ยวหวาน + น้ำมันพริกที่โต๊ะ เตรียมเงินสด/PayPay เผื่อไม่รับบัตร","Kosyu+Ichiba+Nishishinjuku&query_place_id=ChIJ8cluRtGMGGARDNylLHscYpA"),
+  L("","Kosyu Ichiba","โรงแรม","เดิน","","","~15 นาที","เดินลอดใต้ทางรถไฟไปฝั่ง East Exit แล้วเข้าคาบุกิโจ คืนนี้พักเร็ว พรุ่งนี้ออก 08:00",DIR("Kosyu+Ichiba+Nishishinjuku&origin_place_id=ChIJ8cluRtGMGGARDNylLHscYpA",H,"walking"),"walk")]},
+
+ {id:"day-6",n:5,th:"อาทิตย์ 6 Dec (Sun)",title:"กิโมโนอาซากุสะ + อากิบะ + อุเอโนะ + Skytree",items:[
+  L("08:00","โรงแรม","ร้านเช่ากิโมโน อาซากุสะ","เดินไป Shinjuku-nishiguchi แล้ว Oedo (ฝั่ง Ryogoku / Daimon)","Kuramae (E-11)","10","~45 นาทีรวมเดิน","จาก Kuramae เดินไปร้าน ~10 นาที",DIR(H,"Asakusa+Station","transit")),
+  S("09:00","ร้านเช่ากิโมโน แต่งตัว ทำผม","ใช้เวลา 30-60 นาที จองรอบแรก เลือกแพ็กเกจที่มีเสื้อคลุม",null),
+  S("10:00","วัดเซ็นโซจิ + ประตูคามินาริมง + Nakamise","ถ่ายรูปชุดกิโมโนช่วงเช้าก่อนคนแน่น","Sensoji+Temple"),
+  S("11:15","Hatoya Asakusa (มัทฉะ)","เดินจากเซ็นโซจิไม่กี่นาที เปิด 09:00-18:00 คิวอาจรอ 15-30 นาที ระวังเปื้อนชุดกิโมโน","Hatoya+Asakusa&query_place_id=ChIJnXCWIE2NGGARgRGu9pKd8qM"),
+  S("12:00","มื้อเที่ยง: Ramen Hayashida Asakusa","ราเมนโชยุ + ข้าววากิวหน้าไข่แดง สั่งที่ตู้หน้าร้าน เปิด 10:00-23:00 ขอผ้ากันเปื้อน (紙エプロン) ก่อนกิน","Ramen+Hayashida+Asakusa&query_place_id=ChIJuzbNpwyPGGARI2Fdp8soFGw"),
+  S("13:15","ริมแม่น้ำสุมิดะ","ถ่ายรูปชุดกิโมโน มี Skytree เป็นฉากหลัง","Sumida+Park+Asakusa"),
+  S("15:00","คืนชุดกิโมโน","คืนก่อนเวลาปิดของร้าน ส่วนใหญ่ 16:30-17:30",null),
+  L("","อาซากุสะ","อากิฮาบาระ","Tsukuba Express","Akihabara","2","~5 นาที","สถานี TX อาซากุสะอยู่คนละที่กับสถานีสาย Ginza เดินไม่กี่นาที",DIR("Asakusa+Station","Akihabara+Station","transit")),
+  S("15:30","อากิฮาบาระ","ทันถนนคนเดิน Chuo-dori ช่วงบ่ายวันอาทิตย์","Akihabara+Electric+Town"),
+  L("","อากิฮาบาระ","ตลาด Ameyoko","เดิน หรือ JR Yamanote","Okachimachi","2","~15 นาทีถ้าเดิน","เดินเลียบทางรถไฟ JR ขึ้นเหนือ",DIR("Akihabara+Station","Ameyoko+Shopping+Street","walking"),"walk"),
+  S("16:30","ตลาด Ameyoko อุเอโนะ","เดินชมตลาด สตรีทฟู้ด","Ameyoko+Shopping+Street"),
+  S("17:00","Niku no Ohyama (肉の大山)","เมนชิคัตสึที่หน้าต่างหน้าร้าน กินเป็นของว่าง ในร้านรับบัตร หน้าต่างพกเงินสดสำรอง","Niku+no+Ohyama+Ueno&query_place_id=ChIJsfxOVJ6OGGARYR08nkWSLdY"),
+  L("","Ameyoko (Ueno)","Tokyo Skytree","Ginza (สีส้ม) ไป Asakusa แล้ว Tobu Skytree Line","Tokyo Skytree","3 + 1","~25 นาที","ขึ้นสาย Ginza ที่สถานี Ueno เปลี่ยนเป็น Tobu ที่ Asakusa",DIR("Ameyoko+Shopping+Street","Tokyo+Skytree","transit")),
+  S("18:00","Tokyo Skytree Town Dream Christmas","ไฟประดับ 16:00-23:00 ต้นคริสต์มาส 8 เมตร Starry Dome เข้าฟรี","Tokyo+Skytree+Town"),
+  S("18:30","จุดชมวิว Tokyo Skytree ตอนกลางคืน","ซื้อบัตรออนไลน์ล่วงหน้า รอบประมาณ 18:30 บนชั้นชมวิวมีจุดถ่ายรูปธีมคริสต์มาส","Tokyo+Skytree"),
+  S("19:30","มื้อเย็น: Christmas Market","Sky Arena ชั้น 4 เปิด 11:00-22:00 สั่งอาหารรอบสุดท้าย 21:00","Tokyo+Solamachi"),
+  L("20:45","Tokyo Skytree","โรงแรม","Hanzomon (สีม่วง) ไป Kudanshita แล้ว Toei Shinjuku","Shinjuku-sanchome","","40-45 นาที","เดินต่อไปโรงแรม ~8 นาที เช็คเส้นทางใน Google Maps อีกครั้ง",DIR("Tokyo+Skytree",H,"transit"))]},
+
+ {id:"day-7",n:6,th:"จันทร์ 7 Dec (Mon)",title:"สึกิจิ + ฮามะริคิว + กินซ่า + บินกลับ",items:[
+  S("07:45","เช็คเอาท์ ฝากกระเป๋าที่โรงแรม","",H),
+  L("","โรงแรม","กินซ่า","เดินไปสถานีชินจูกุ แล้ว Marunouchi (สีแดง)","Ginza (M-16)","8","~18 นาที","เดินจากโรงแรมไปชานชาลา Marunouchi ~8 นาที",DIR(H,"Tsukiji+Outer+Market","transit")),
+  L("","กินซ่า","ตลาดนอกสึกิจิ","Hibiya (สีเทา)","Tsukiji (H-11)","2","~3 นาที","ออกทางออก 1 ตลาดนอกอยู่ใกล้ทางออก",null),
+  S("08:30","ตลาดนอกสึกิจิ","มื้อเช้าซีฟู้ด เดินเล่นในตลาด","Tsukiji+Outer+Market"),
+  S("10:00","Tsukiji Gindaco (ทาโกะยากิ)","สาขาในตลาดนอกสึกิจิ เปิด 10:00-19:00 ไปตอนร้านเปิดคิวไม่ยาว","Gindaco+Takoyaki+Tsukiji&query_place_id=ChIJXR3hCcmLGGAR2aSHk20X7JI"),
+  L("","ตลาดสึกิจิ","สวนฮามะริคิว","เดิน","","","10-15 นาที","สวนเปิด 09:00 มีค่าเข้า",DIR("Tsukiji+Outer+Market","Hamarikyu+Gardens","walking"),"walk"),
+  S("10:30","สวนฮามะริคิว","ดื่มมัทฉะในโรงน้ำชากลางสระ","Hamarikyu+Gardens"),
+  L("","สวนฮามะริคิว","กินซ่า","เดิน","","","15-20 นาที","",DIR("Hamarikyu+Gardens","Ginza+Station","walking"),"walk"),
+  S("11:45","กินซ่า","Uniqlo, Muji, Itoya ของฝากชิ้นสุดท้าย + มื้อเที่ยงเบาๆ ออกจากกินซ่าไม่เกิน 12:45","Ginza+Tokyo"),
+  L("12:45","กินซ่า","โรงแรม","Marunouchi (สีแดง)","Shinjuku (M-08)","8","~18 นาที","เดินต่อไปโรงแรม ~8 นาที",DIR("Ginza+Station",H,"transit")),
+  S("13:00","กลับโรงแรม รับกระเป๋า","",H),
+  L("14:10","โรงแรม","ชานชาลา N'EX สถานี JR ชินจูกุ","เดิน","","","10-15 นาที","เข้าทาง East Exit ตามป้าย Narita Express ใช้ลิฟต์เพราะมีกระเป๋า",DIR(H,"Shinjuku+Station+East+Exit","walking"),"walk"),
+  L("14:30","สถานี JR ชินจูกุ","สนามบินนาริตะ T2","JR Narita Express (N'EX)","Airport Terminal 2·3 (空港第2ビル)","ตรง","80-90 นาที","ลงที่ Terminal 2·3 ไม่ใช่สถานีสุดท้าย (Terminal 1) ถึง ~16:00-16:30",DIR("Shinjuku+Station+Tokyo","Narita+Airport+Terminal+2","transit")),
+  S("16:30","ถึงนาริตะ Terminal 2 เช็คอิน โหลดกระเป๋า","ช้าสุดไม่เกิน 17:30 เคาน์เตอร์ปิดราว 18:45","Narita+Airport+Terminal+2"),
+  S("19:45","ไฟลต์ XJ607 นาริตะ → ดอนเมือง","ถึงดอนเมือง 01:10 วันที่ 8 Dec","Narita+Airport+Terminal+2")]}
+];
+const CHECK = [
+ {title:"การจอง",items:[
+  ["จองตั๋วเครื่องบิน","2-7 Dec","XJ602 DMK-NRT 2 Dec 01:40-09:45\nXJ607 NRT-DMK 7 Dec 19:45-01:10 (+1)",true],
+  ["จองโรงแรม","2-7 Dec","APA Hotel Shinjuku-Kabukicho Tower รวม 5 คืน",false],
+  ["ตั๋ว Tokyo DisneySea 1-Day Passport (2 ใบ)","Thu 3 Dec","ซื้อผ่านเว็บหรือแอปทางการ ราคาเปลี่ยนตามวัน",false],
+  ["ทัวร์ฟูจิ 1 วัน จากชินจูกุ (2 คน)","Fri 4 Dec","จองผ่าน Klook หรือ KKday เลือกจุดนัดฝั่งชินจูกุ เช็คว่ารวมอาหารกลางวันไหม และยกเลิกหรือเลื่อนวันฟรีได้ 24 ชม. ล่วงหน้า",false],
+  ["Shibuya Sky รอบ 15:45 (2 ใบ)","Sat 5 Dec","วันเสาร์เต็มเร็ว จองทันทีที่เปิดขาย",false],
+  ["ตั๋ว N'EX ขาไป","Wed 2 Dec","นาริตะ ไป ชินจูกุ",false],
+  ["ตั๋ว N'EX ขากลับ","Mon 7 Dec","ชินจูกุ ไป นาริตะ รอบประมาณ 14:30",false],
+  ["ซื้อ Welcome Suica (2 ใบ)","Wed 2 Dec","ซื้อที่ JR East Travel Service Center สถานี Airport Terminal 2·3 (ชั้น B1) ค่ามัดจำ ¥500 ต่อใบ ถ้าหมด ซื้อที่สถานี JR ชินจูกุแทน",false],
+  ["โหลดแอป Tokyo Disney Resort","ก่อน 3 Dec","ดูเวลารอคิว และซื้อ Premier Access",true],
+  ["เช่ากิโมโนอาซากุสะ (2 ชุด)","Sun 6 Dec","จองรอบ 09:00 เช็คว่ารวมทำผม รองเท้า เสื้อคลุม และเวลาคืนชุด",false],
+  ["บัตรขึ้น Tokyo Skytree รอบค่ำ (2 ใบ)","Sun 6 Dec","ซื้อออนไลน์ เลือกรอบประมาณ 18:30 ไฟคริสต์มาสและตลาดคริสต์มาสเข้าฟรี",false]]},
+ {title:"สิ่งที่ต้องเตรียม",items:[
+  ["พาสปอร์ตอายุเหลือมากกว่า 6 เดือน","ก่อนบิน","คนไทยเที่ยวญี่ปุ่นไม่เกิน 15 วันไม่ต้องขอวีซ่า",false],
+  ["ประกันการเดินทาง","ก่อนบิน","เก็บไฟล์กรมธรรม์ไว้ในมือถือ",false],
+  ["เก็บใบจองทั้งหมดไว้ในมือถือ","ก่อนบิน","ไฟลต์ โรงแรม DisneySea voucher ทัวร์ฟูจิ Shibuya Sky และรูปหน้าพาสปอร์ต",false],
+  ["กรอก Visit Japan Web","ก่อนบิน","กรอกข้อมูลพาสปอร์ต ไฟลต์ ที่พัก ให้ครบทั้ง 2 คน แล้วเก็บ QR code ไว้ยื่นที่ ตม. และศุลกากร",false],
+  ["เช็คอินออนไลน์ + ชั่งน้ำหนักกระเป๋า","1 วันก่อนบิน","เผื่อน้ำหนักไว้ใส่ของฝากขากลับ",false],
+  ["แลกเงินเยนสด","ก่อนบิน","ร้านเล็ก ตลาด และศาลเจ้าหลายที่รับแค่เงินสด",false],
+  ["เปิดใช้บัตรเดบิต / เครดิตในต่างประเทศ","ก่อนบิน","เปิดในแอปธนาคาร หรือใช้ Travel Card",false],
+  ["eSIM หรือ Pocket WiFi","ก่อนบิน","ติดตั้ง eSIM ให้เสร็จตั้งแต่อยู่ไทย",false],
+  ["โหลดแผนที่ออฟไลน์ใน Google Maps","ก่อนบิน","โตเกียว และคาวากุจิโกะ",false],
+  ["Google Translate + โหลดภาษาญี่ปุ่นออฟไลน์","ก่อนบิน","ใช้กล้องแปลเมนูและป้ายได้",false],
+  ["ปลั๊กแปลงสำหรับญี่ปุ่น","จัดกระเป๋า","ญี่ปุ่นใช้ปลั๊กขาแบน 2 ขา ไฟ 100V",false],
+  ["พาวเวอร์แบงก์ + สายชาร์จ","จัดกระเป๋า","พาวเวอร์แบงก์ต้องถือขึ้นเครื่อง ห้ามใส่กระเป๋าโหลด",false],
+  ["เสื้อกันหนาว + เสื้อตัวในกันหนาว","จัดกระเป๋า","โตเกียวต้นธันวาคมประมาณ 6-15°C ใส่เป็นชั้นๆ ถอดง่าย",false],
+  ["ถุงมือ หมวก ผ้าพันคอ","จัดกระเป๋า","ฟูจิตอนเช้าอาจใกล้ 0°C และ DisneySea ตอนค่ำลมแรง",false],
+  ["รองเท้าที่เดินสบาย","จัดกระเป๋า","ทริปนี้เดินวันละหลายกิโล ไม่ควรใช้รองเท้าคู่ใหม่",false],
+  ["ลิปมัน ครีมทาผิว","จัดกระเป๋า","อากาศหน้าหนาวที่ญี่ปุ่นแห้งมาก",false],
+  ["ยาประจำตัว + ยาสามัญ","จัดกระเป๋า","ยาบางชนิด เช่น ยาแก้หวัดบางตัว ห้ามนำเข้าญี่ปุ่น เช็คก่อนจัดกระเป๋า",false],
+  ["กระเป๋าใส่เหรียญ","จัดกระเป๋า","ที่ญี่ปุ่นได้เงินทอนเป็นเหรียญเยอะ",false],
+  ["ถุงผ้า + ถุงใส่ขยะ","จัดกระเป๋า","ถุงที่ร้านต้องซื้อ และถังขยะตามทางหายาก",false],
+  ["กระเป๋าสะพายใบเล็ก","จัดกระเป๋า","ใช้วัน DisneySea และวันทัวร์ฟูจิ",false],
+  ["พกพาสปอร์ตตัวจริงตอนช้อป","ระหว่างทริป","ใช้วัน DisneySea และวันไปฟูจิ",false],
+  ["เช็คพยากรณ์อากาศฟูจิ","Thu 3 Dec","ถ้าเมฆมาก ติดต่อทัวร์เรื่องเลื่อนวัน",false],
+  ["ปักหมุดจุดนัดทัวร์ฟูจิ","Thu 3 Dec","ดูจุดนัดและเวลาใน voucher พรุ่งนี้ออกจากโรงแรม 07:15",false]]},
+ {title:"สิ่งที่ต้องเตรียมจากบ้าน",items:[
+  ["กระเป๋าเดินทางอันใหญ่","จัดกระเป๋า","",false],
+  ["ยืมกระเป๋า carry on พี่นุ๊ก","จัดกระเป๋า","",false],
+  ["ยืมชุดพี่นุ๊ก","จัดกระเป๋า","",false],
+  ["ตัวแปลงสายไฟ","จัดกระเป๋า","",false],
+  ["ยืมกระเป๋า longchamp สีดำพี่นุ๊ก","จัดกระเป๋า","",false]]}
+];
+
+// [japanese, romaji, thai, english]
+const PHRASES = [
+ {th:"👋 ทักทาย / พื้นฐาน", en:"👋 Basics", items:[
+  ["こんにちは","Konnichiwa","สวัสดี","Hello"],
+  ["ありがとうございます","Arigatou gozaimasu","ขอบคุณครับ/ค่ะ","Thank you"],
+  ["すみません","Sumimasen","ขอโทษ / ขอโทษนะ (เรียกพนักงาน)","Excuse me / sorry"],
+  ["はい / いいえ","Hai / Iie","ใช่ / ไม่ใช่","Yes / No"],
+  ["大丈夫です","Daijoubu desu","ไม่เป็นไร / โอเค","It's fine / I'm OK"],
+  ["わかりません","Wakarimasen","ไม่เข้าใจ","I don't understand"],
+  ["英語を話せますか？","Eigo o hanasemasu ka?","พูดภาษาอังกฤษได้ไหม","Do you speak English?"],
+  ["もう一度お願いします","Mou ichido onegaishimasu","ช่วยพูดอีกครั้งได้ไหม","Could you say that again?"],
+  ["これは何ですか？","Kore wa nan desu ka?","นี่คืออะไร","What is this?"],
+  ["写真を撮ってもいいですか？","Shashin o tottemo ii desu ka?","ถ่ายรูปได้ไหม","May I take a photo?"],
+  ["写真を撮ってもらえますか？","Shashin o totte moraemasu ka?","ช่วยถ่ายรูปให้หน่อยได้ไหม","Could you take our photo?"]]},
+ {th:"🍜 ร้านอาหาร", en:"🍜 Restaurant", items:[
+  ["二人です","Futari desu","2 คนครับ/ค่ะ","Two people, please"],
+  ["英語のメニューはありますか？","Eigo no menyuu wa arimasu ka?","มีเมนูภาษาอังกฤษไหม","Do you have an English menu?"],
+  ["おすすめは何ですか？","Osusume wa nan desu ka?","เมนูแนะนำคืออะไร","What do you recommend?"],
+  ["これをください","Kore o kudasai","เอาอันนี้ครับ/ค่ะ","This one, please"],
+  ["お水をください","Omizu o kudasai","ขอน้ำเปล่าหน่อย","Water, please"],
+  ["お会計お願いします","Okaikei onegaishimasu","เช็คบิลด้วย","The bill, please"],
+  ["カードで払えますか？","Kaado de haraemasu ka?","จ่ายบัตรได้ไหม","Can I pay by card?"],
+  ["持ち帰りできますか？","Mochikaeri dekimasu ka?","ซื้อกลับบ้านได้ไหม","Can I take it away?"],
+  ["待ち時間はどのくらいですか？","Machi jikan wa dono kurai desu ka?","ต้องรอนานเท่าไหร่","How long is the wait?"],
+  ["ごちそうさまでした","Gochisousama deshita","ขอบคุณสำหรับอาหาร (พูดตอนกินเสร็จ)","Thank you for the meal"]]},
+ {th:"⚠️ อาหารที่กินไม่ได้", en:"⚠️ Dietary needs", items:[
+  ["〇〇が食べられません","〇〇 ga taberaremasen","กิน 〇〇 ไม่ได้","I can't eat 〇〇"],
+  ["牛肉 / 豚肉 / えび","Gyuuniku / Butaniku / Ebi","เนื้อวัว / เนื้อหมู / กุ้ง","Beef / Pork / Shrimp"],
+  ["辛くしないでください","Karaku shinaide kudasai","ไม่เผ็ดนะ","Not spicy, please"],
+  ["わさび抜きでお願いします","Wasabi nuki de onegaishimasu","ไม่ใส่วาซาบิ","No wasabi, please"]]},
+ {th:"🛍️ ช้อปปิ้ง", en:"🛍️ Shopping", items:[
+  ["いくらですか？","Ikura desu ka?","ราคาเท่าไหร่","How much is it?"],
+  ["免税できますか？","Menzei dekimasu ka?","ทำ tax-free ได้ไหม","Is tax-free available?"],
+  ["試着してもいいですか？","Shichaku shitemo ii desu ka?","ลองได้ไหม","Can I try it on?"],
+  ["他のサイズはありますか？","Hoka no saizu wa arimasu ka?","มีไซซ์อื่นไหม","Do you have another size?"],
+  ["袋はいりません","Fukuro wa irimasen","ไม่รับถุง","I don't need a bag"],
+  ["袋をください","Fukuro o kudasai","ขอถุงด้วย","A bag, please"],
+  ["見ているだけです","Mite iru dake desu","แค่ดูเฉยๆ","I'm just looking"]]},
+ {th:"🚃 เดินทาง", en:"🚃 Getting around", items:[
+  ["〇〇はどこですか？","〇〇 wa doko desu ka?","〇〇 อยู่ที่ไหน","Where is 〇〇?"],
+  ["駅はどこですか？","Eki wa doko desu ka?","สถานีอยู่ที่ไหน","Where is the station?"],
+  ["トイレはどこですか？","Toire wa doko desu ka?","ห้องน้ำอยู่ที่ไหน","Where is the toilet?"],
+  ["この電車は新宿に行きますか？","Kono densha wa Shinjuku ni ikimasu ka?","รถไฟขบวนนี้ไปชินจูกุไหม","Does this train go to Shinjuku?"],
+  ["何番線ですか？","Nanban-sen desu ka?","ชานชาลาที่เท่าไหร่","Which platform?"],
+  ["出口はどこですか？","Deguchi wa doko desu ka?","ทางออกอยู่ที่ไหน","Where is the exit?"],
+  ["チャージしたいです","Chaaji shitai desu","อยากเติมเงินบัตร","I'd like to top up (my IC card)"],
+  ["ここに行きたいです","Koko ni ikitai desu","อยากไปที่นี่ (ชี้แผนที่)","I want to go here (point at map)"],
+  ["この住所までお願いします","Kono juusho made onegaishimasu","ไปที่อยู่นี้ครับ/ค่ะ (แท็กซี่)","To this address, please (taxi)"]]},
+ {th:"🏨 โรงแรม", en:"🏨 Hotel", items:[
+  ["チェックインお願いします","Chekku-in onegaishimasu","ขอเช็คอิน","Check in, please"],
+  ["荷物を預かってもらえますか？","Nimotsu o azukatte moraemasu ka?","ฝากกระเป๋าได้ไหม","Can you keep our luggage?"],
+  ["荷物を受け取りに来ました","Nimotsu o uketori ni kimashita","มารับกระเป๋าที่ฝากไว้","I'm here to pick up my luggage"],
+  ["Wi-Fiのパスワードは何ですか？","Wai-fai no pasuwaado wa nan desu ka?","รหัส Wi-Fi คืออะไร","What's the Wi-Fi password?"]]},
+ {th:"🆘 ฉุกเฉิน", en:"🆘 Emergency", items:[
+  ["助けてください","Tasukete kudasai","ช่วยด้วย","Please help"],
+  ["道に迷いました","Michi ni mayoimashita","หลงทาง","I'm lost"],
+  ["財布をなくしました","Saifu o nakushimashita","กระเป๋าสตางค์หาย","I lost my wallet"],
+  ["病院はどこですか？","Byouin wa doko desu ka?","โรงพยาบาลอยู่ที่ไหน","Where is the hospital?"],
+  ["気分が悪いです","Kibun ga warui desu","รู้สึกไม่สบาย","I feel sick"],
+  ["警察 110 / 救急車 119","Keisatsu 110 / Kyuukyuusha 119","ตำรวจ 110 / รถพยาบาล-ดับเพลิง 119","Police 110 / Ambulance & fire 119"]]}
+];
+// Simplified, hand-drawn schematic of only the lines used on this trip (not to scale)
+const RAIL_LINES = [
+  {id:"yamanote", c:"#80C241", w:7, th:"JR Yamanote (วงกลม)", en:"JR Yamanote (loop)", d:"M150,140 Q150,100 190,100 L480,100 Q520,100 520,140 L520,430 Q520,470 480,470 L190,470 Q150,470 150,430 Z", days:"5"},
+  {id:"chuo", c:"#F15A22", w:6, th:"JR Chuo Rapid", en:"JR Chuo Rapid", d:"M150,250 L330,250 L400,320 L520,320", days:"2"},
+  {id:"ginza", c:"#F39700", w:6, th:"Ginza Line (G)", en:"Ginza Line (G)", d:"M150,410 L290,410 L440,410 L470,390 L470,165 L500,140 L520,130 L640,130", days:"5, 6"},
+  {id:"marunouchi", c:"#E60012", w:6, th:"Marunouchi Line (M)", en:"Marunouchi Line (M)", d:"M150,262 L210,262 L338,390 L470,390 L520,330", days:"7"},
+  {id:"hibiya", c:"#9CAEB7", w:6, th:"Hibiya Line (H)", en:"Hibiya Line (H)", d:"M470,390 L560,410", days:"7"},
+  {id:"oedo", c:"#CE045B", w:6, th:"Toei Oedo Line (E)", en:"Toei Oedo Line (E)", d:"M118,215 L118,180 L140,158 L600,158 L640,180 L640,330 L610,450", days:"3, 6"},
+  {id:"yurakucho", c:"#C1A470", w:6, th:"Yurakucho Line (Y)", en:"Yurakucho Line (Y)", d:"M610,450 L680,500", days:"3"},
+  {id:"keiyo", c:"#C9252F", w:5, th:"JR Keiyo", en:"JR Keiyo", d:"M520,326 L660,420 L680,500 L770,500", days:"3"},
+  {id:"tx", c:"#2E3192", w:5, th:"Tsukuba Express", en:"Tsukuba Express", d:"M520,230 L640,130", days:"6"},
+  {id:"tobu", c:"#0F6CC3", w:5, th:"Tobu Skytree Line", en:"Tobu Skytree Line", d:"M640,130 L740,130", days:"6"},
+  {id:"hanzomon", c:"#8F76D6", w:6, th:"Hanzomon Line (Z)", en:"Hanzomon Line (Z)", d:"M380,200 L420,270 L700,270 L740,200 L740,130", days:"6"},
+  {id:"shinjuku", c:"#6CBB5A", w:6, th:"Toei Shinjuku Line (S)", en:"Toei Shinjuku Line (S)", d:"M210,262 L262,200 L380,200", days:"6"},
+  {id:"disney", c:"#25B5D9", w:5, th:"Disney Resort Line", en:"Disney Resort Line", d:"M770,500 L770,545", days:"3"},
+  {id:"nex", c:"#3B2A22", w:3, dash:"8 6", th:"N'EX → สนามบินนาริตะ", en:"N'EX → Narita Airport", d:"M150,240 L140,240 L140,60 L790,60 L790,95", days:"2, 7"}
+];
+// [name, x, y, labelDx, labelDy, anchor, major]
+const RAIL_STATIONS = [
+  ["Shinjuku",150,250,-12,4,"end",1],
+  ["Shinjuku-nishiguchi",118,215,-10,-6,"end",0],
+  ["Shinjuku-sanchome",210,262,6,20,"start",0],
+  ["Harajuku",150,340,-12,4,"end",0],
+  ["Shibuya",150,410,-12,4,"end",1],
+  ["Omotesando",230,410,0,22,"middle",0],
+  ["Gaienmae",290,410,0,-12,"middle",0],
+  ["Kudanshita",380,200,0,-12,"middle",0],
+  ["Ginza",470,390,-10,22,"end",1],
+  ["Tokyo",520,322,12,4,"start",1],
+  ["Akihabara",520,230,12,16,"start",0],
+  ["Ueno",520,130,-10,-10,"end",1],
+  ["Kuramae",640,180,12,4,"start",0],
+  ["Asakusa",640,130,0,-12,"middle",1],
+  ["Tokyo Skytree",740,130,0,-12,"middle",1],
+  ["Tsukiji",560,410,8,18,"start",0],
+  ["Tsukishima",610,450,-10,16,"end",0],
+  ["Shin-Kiba",680,500,0,22,"middle",0],
+  ["Maihama",770,500,0,-14,"middle",1],
+  ["Tokyo DisneySea",770,545,0,20,"middle",1]
+];
+
+function railMapSvg(){
+  const lines = RAIL_LINES.map(l => `<path d="${l.d}" fill="none" stroke="${l.c}" stroke-width="${l.w}" stroke-linecap="round" stroke-linejoin="round"${l.dash ? ` stroke-dasharray="${l.dash}"` : ""}/>`).join("");
+  const st = RAIL_STATIONS.map(([n,x,y,dx,dy,a,m]) => `<g><circle cx="${x}" cy="${y}" r="${m ? 7 : 5.5}" fill="#fff" stroke="#3b2a22" stroke-width="${m ? 2.5 : 2}"/>
+    <text x="${x+dx}" y="${y+dy}" text-anchor="${a}" font-size="${m ? 14 : 12}" font-weight="${m ? 700 : 500}" fill="#3b2a22" paint-order="stroke" stroke="#faf6f1" stroke-width="4">${n}</text></g>`).join("");
+  return `<svg viewBox="-20 30 880 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simplified Tokyo rail map">
+    <rect x="-20" y="30" width="880" height="560" fill="#faf6f1"/>
+    ${lines}
+    <text x="465" y="54" text-anchor="middle" font-size="12" font-weight="700" fill="#3b2a22">N'EX ✈ Narita Airport</text>
+    <g><rect x="160" y="212" width="74" height="22" rx="11" fill="#7a4a35"/><text x="197" y="227" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">🏨 APA</text></g>
+    ${st}
+  </svg>`;
+}
+// Good-to-know tab. Each section: title {th,en}, items: [{th,en}] text, optional links [{label,url}]
+const TIPS = [
+ {icon:"🌤️", th:"เช็คสภาพอากาศ", en:"Weather", items:[
+   {th:"ต้นธันวาคม โตเกียวประมาณ 6-15°C ฟูจิตอนเช้าอาจใกล้ 0°C ใส่เสื้อเป็นชั้นๆ", en:"Early December in Tokyo is about 6-15°C, Fuji mornings can be near 0°C. Dress in layers"},
+   {th:"เช็คพยากรณ์อากาศคืนก่อนวันทัวร์ฟูจิ (Thu 3 Dec) ถ้าเมฆมากให้ติดต่อทัวร์เรื่องเลื่อนวัน", en:"Check the forecast the night before the Fuji tour (Thu 3 Dec). If it's cloudy, ask the tour about changing the date"}],
+  links:[
+   {th:"กรมอุตุนิยมวิทยาญี่ปุ่น (JMA)", en:"Japan Meteorological Agency (JMA)", url:"https://www.jma.go.jp/jma/indexe.html"},
+   {th:"tenki.jp (ญี่ปุ่น, รายชั่วโมง)", en:"tenki.jp (Japanese, hourly)", url:"https://tenki.jp/"},
+   {th:"weather.com โตเกียว 10 วัน", en:"weather.com Tokyo 10-day", url:"https://weather.com/en-GB/weather/tenday/l/JATY0129:1:JA"},
+   {th:"meteoblue โตเกียว", en:"meteoblue Tokyo", url:"https://www.meteoblue.com/en/weather/week/tokyo_japan_1850147"},
+   {th:"AccuWeather โตเกียว เดือนธันวาคม", en:"AccuWeather Tokyo December", url:"https://www.accuweather.com/th/jp/tokyo/226396/december-weather/226396"}]},
+ {icon:"🗻", th:"วันนี้เห็นฟูจิไหม", en:"Can we see Fuji?", items:[
+   {th:"พยากรณ์ว่าจะเห็นฟูจิล่วงหน้า 10 วัน แยกช่วงเช้า/บ่าย ใช้ฝั่ง North สำหรับคาวากุจิโกะ และมีกล้องสดดูได้", en:"10-day Fuji visibility forecast for morning and afternoon. Use the North side for Kawaguchiko, plus live cameras"}],
+  links:[
+   {th:"Is Fuji Visible?", en:"Is Fuji Visible?", url:"https://isfujivisible.com/"},
+   {th:"กล้องสดรอบฟูจิ", en:"Mt Fuji live cams", url:"https://isfujivisible.com/mt-fuji-live-cams"},
+   {th:"พยากรณ์ทะเลสาบคาวากุจิโกะ", en:"Lake Kawaguchiko forecast", url:"https://isfujivisible.com/viewspots/lake-kawaguchiko"}]},
+ {icon:"🆘", th:"เบอร์ฉุกเฉิน", en:"Emergency numbers", phones:[
+   {th:"ตำรวจ", en:"Police", num:"110"},
+   {th:"รถพยาบาล / ดับเพลิง", en:"Ambulance / Fire", num:"119"},
+   {th:"ปรึกษาอาการป่วยไม่ฉุกเฉิน", en:"Non-urgent medical advice", num:"#7119"},
+   {th:"Japan Visitor Hotline (24 ชม. อังกฤษ/จีน/เกาหลี)", en:"Japan Visitor Hotline (24 h, EN/CN/KR)", num:"050-3816-2787"}],
+  links:[{th:"JNTO Visitor Hotline", en:"JNTO Visitor Hotline", url:"https://www.japan.travel/en/plan/hotline/"}]},
+ {icon:"🧳", th:"กระเป๋าขึ้นเครื่อง (ตามใบจอง)", en:"Baggage (from the bookings)", items:[
+   {th:"ทุกคนถือขึ้นเครื่องได้ 1 ใบ (56x36x23 ซม.) + ของใช้ส่วนตัว 1 ชิ้น (40x30x10 ซม.) รวมกันไม่เกิน 7 kg", en:"Each person: 1 carry-on (56x36x23 cm) + 1 personal item (40x30x10 cm), 7 kg combined"},
+   {th:"Deem: ไม่มีกระเป๋าโหลดฟรีทั้งไปและกลับ", en:"Deem: no checked baggage either way"},
+   {th:"Near: ขาไปซื้อกระเป๋าโหลดเพิ่ม 20 kg · ขากลับมีกระเป๋าโหลด 25 kg", en:"Near: 20 kg checked bag purchased outbound · 25 kg checked bag on return"},
+   {th:"พาวเวอร์แบงก์ต้องถือขึ้นเครื่อง ห้ามใส่กระเป๋าโหลด", en:"Power banks go in carry-on, never in checked bags"}]},
+ {icon:"💴", th:"เงินและการจ่าย", en:"Money", items:[
+   {th:"ร้านเล็ก ตลาด และศาลเจ้าหลายที่รับแค่เงินสด พกเยนติดตัวไว้", en:"Many small shops, markets and shrines take cash only. Carry some yen"},
+   {th:"Suica แตะจ่ายได้ทั้งรถไฟ รถบัส ร้านสะดวกซื้อ และตู้กดน้ำ", en:"Suica works on trains, buses, convenience stores and vending machines"},
+   {th:"Tax-free: ซื้อครบ ¥5,500 ต่อร้าน ต้องแสดงพาสปอร์ตตัวจริง", en:"Tax-free from ¥5,500 per store. Show your actual passport"},
+   {th:"ญี่ปุ่นไม่มีธรรมเนียมให้ทิป", en:"No tipping in Japan"}]},
+ {icon:"🙇", th:"มารยาทที่ควรรู้", en:"Etiquette", items:[
+   {th:"บันไดเลื่อนในโตเกียว ยืนชิดซ้าย เดินขวา", en:"On Tokyo escalators, stand on the left and walk on the right"},
+   {th:"บนรถไฟพูดเบาๆ ไม่คุยโทรศัพท์", en:"Keep quiet on trains, no phone calls"},
+   {th:"ถังขยะตามทางหายาก พกถุงใส่ขยะกลับไปทิ้งที่โรงแรม", en:"Public bins are rare. Carry a bag for rubbish and bin it at the hotel"},
+   {th:"ต่อคิวเป็นแถว และไม่เดินกินในบางย่าน เช่น ถนน Nakamise", en:"Queue in line, and avoid eating while walking in some areas such as Nakamise"}]},
+ {icon:"🔌", th:"อื่นๆ", en:"Other", items:[
+   {th:"เวลาญี่ปุ่นเร็วกว่าไทย 2 ชั่วโมง", en:"Japan is 2 hours ahead of Thailand"},
+   {th:"ปลั๊กขาแบน 2 ขา ไฟ 100V", en:"2-pin flat plugs, 100V"},
+   {th:"รถไฟเที่ยวสุดท้ายส่วนใหญ่ราวเที่ยงคืน เช็คใน Google Maps ก่อนกลับ", en:"Most last trains are around midnight. Check Google Maps before heading back"},
+   {th:"กรอก Visit Japan Web ให้ครบ 2 คนก่อนบิน แล้วเก็บ QR ไว้ยื่น ตม.", en:"Complete Visit Japan Web for both travellers before flying and keep the QR codes for immigration"}],
+  links:[{th:"Visit Japan Web", en:"Visit Japan Web", url:"https://www.vjw.digital.go.jp/"}]}
+];
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store = {
+  get(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+};
+let checks = store.get("jp-check", {});
+let lang = store.get("jp-lang", "th") === "en" ? "en" : "th";
+const tx = (th, en) => lang === "en" ? en : th;
+const T = s => lang === "en" && typeof s === "string" && s in EN_MAP ? EN_MAP[s] : s;
+const trDeep = v => typeof v === "string" ? T(v) : Array.isArray(v) ? v.map(trDeep) : (v && typeof v === "object") ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, (k === "q" || k === "link" || k === "k" || k === "m" || k === "id") ? x : trDeep(x)])) : v;
+let DAYS_V = DAYS, CHECK_V = CHECK;
+const view = document.getElementById("view");
+const ICON = {walk:"🚶", train:"🚃", bus:"🚌"};
+
+function tipHtml(tip){
+  if (!tip) return "";
+  return `<div class="tip"><b>${esc(tip.title)}</b><ul>${tip.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul></div>`;
+}
+
+function stopHtml(it, first){
+  const map = it.q ? `<a href="${esc(MAPS(it.q))}" target="_blank" rel="noopener">${tx("📍 เปิดแผนที่","📍 Open map")}</a>` : `<span>${tx("📍 ใส่ร้านหลังจอง","📍 Add shop after booking")}</span>`;
+  return `<div class="it${first ? " first" : ""}"><div class="cd">
+    <button class="hd" type="button"><div class="tm">${esc(it.t)}${it.pre ? `<small>${esc(it.pre)}</small>` : ""}</div>
+      <div class="nm"><b>${esc(it.n)}</b>${viaSummary(it.via)}${it.d ? `<span>${esc(it.d)}</span>` : ""}</div><div class="ar">▼</div></button>
+    <div class="bd"><hr>${stepsHtml(it.via, tx("🧭 วิธีไปที่นี่","🧭 How to get here"))}<div class="chips">${map}</div>${tipHtml(it.tip)}${stepsHtml(it.after, it.after.some(l => l.to === "โรงแรม" || l.to === "Hotel") ? tx("🏨 กลับโรงแรม","🏨 Back to the hotel") : tx("➡️ หลังจากนี้","➡️ After this"))}</div></div></div>`;
+}
+
+function stepsHtml(legs, label){
+  if (!legs || !legs.length) return "";
+  return `<div class="via"><div class="vh">${label}</div>${legs.map((it, i) => `
+    <div class="st"><div class="si">${ICON[it.m]}</div><div>
+      <div class="sr">${it.t ? `<span class="dep">${tx("ออก","Depart")} ${esc(it.t)}</span>` : ""}${esc(it.f)} → ${esc(it.to)}</div>
+      <div class="sh">${esc(it.how)}${it.at ? ` · ${tx("ลง","get off at")} <b>${esc(it.at)}</b>` : ""}</div>
+      <div class="sm">${[it.dur ? "⏱ " + esc(it.dur) : "", it.st ? "🚉 " + (/^\d/.test(it.st) ? esc(it.st) + tx(" สถานี"," stops") : esc(it.st)) : ""].filter(Boolean).join(" · ")}</div>
+      ${it.d ? `<div class="sn">${esc(it.d)}</div>` : ""}
+      ${it.link ? `<a class="sl" href="${esc(it.link)}" target="_blank" rel="noopener">${tx("🗺️ ดูเส้นทาง","🗺️ Route")}</a>` : ""}
+    </div></div>`).join("")}</div>`;
+}
+
+function viaSummary(legs){
+  if (!legs || !legs.length) return "";
+  const main = legs.find(l => l.m !== "walk") || legs[0];
+  const how = main.m === "walk" ? tx("เดิน","Walk") : main.how;
+  return `<em>${ICON[main.m]} ${esc(how)}${main.dur ? " · " + esc(main.dur) : ""}${legs.length > 1 ? ` · ${legs.length} ${tx("ช่วง","legs")}` : ""}</em>`;
+}
+
+function groupStops(items){
+  const stops = []; let pending = [];
+  for (const it of items){
+    if (it.k === "l" && it.back && stops.length) stops[stops.length - 1].after.push(it);
+    else if (it.k === "l") pending.push(it);
+    else { stops.push({...it, via: pending, after: []}); pending = []; }
+  }
+  if (pending.length && stops.length) stops[stops.length - 1].after = pending;
+  return stops;
+}
+
+function renderDay(d){
+  const chips = DAYS_V.map(x => `<a href="#${x.id}" class="${x.id === d.id ? "on" : ""}"><b>Day ${x.n}</b><small>${esc(x.th)}</small></a>`).join("");
+  const stops = groupStops(d.items);
+  view.innerHTML = `<div class="days" id="days">${chips}</div>
+    <div class="banner">${esc(d.title)}<small>${stops.length} ${tx("จุดแวะ · กดการ์ดเพื่อดูรายละเอียดและวิธีเดินทาง","stops · tap a card for details and directions")}</small></div>
+    <div class="tl">${stops.map((it, i) => stopHtml(it, i === 0)).join("")}</div>`;
+  view.querySelectorAll(".hd").forEach(b => b.addEventListener("click", () => b.closest(".it").classList.toggle("open")));
+  const on = view.querySelector(".days a.on"); if (on) on.scrollIntoView({inline:"center", block:"nearest"});
+}
+
+const FLIGHTS = [
+  {dir:"ขาไป", no:"XJ602", date:"WED 02 DEC 2026", from:"DMK", fromCity:"Bangkok · Don Mueang", fromT:"T1", to:"NRT", toCity:"Tokyo · Narita", toT:"T2",
+   dep:"01:40", arr:"09:45", dur:"6h 05m", checkin:"22:30 · 1 DEC", close:"00:40", note:"ประตูขึ้นเครื่องปิดก่อนออก ~20 นาที"},
+  {dir:"ขากลับ", no:"XJ607", date:"MON 07 DEC 2026", from:"NRT", fromCity:"Tokyo · Narita", fromT:"T2", to:"DMK", toCity:"Bangkok · Don Mueang", toT:"T1",
+   dep:"19:45", arr:"01:10", arrNote:"+1", dur:"7h 25m", checkin:"ไม่เกิน 17:30", close:"18:45", note:"ถึงดอนเมือง 8 Dec"}
+];
+
+function ticketHtml(f0){
+  const f = trDeep(f0);
+  return `<div class="tk">
+    <div class="tk-top"><span>✈ ${esc(f.dir)} · BOARDING PASS</span><span>FLIGHT <b>${esc(f.no)}</b></span></div>
+    <div class="tk-main">
+      <div class="tk-route">
+        <div><div class="iata">${esc(f.from)}</div><div class="city">${esc(f.fromCity)}</div></div>
+        <div class="path"><span class="dot"></span><span class="line"></span><span class="pl">✈</span><span class="line"></span><span class="dot"></span><small>${esc(f.dur)}</small></div>
+        <div class="r"><div class="iata">${esc(f.to)}</div><div class="city">${esc(f.toCity)}</div></div>
+      </div>
+      <div class="tk-grid">
+        <div><label>DATE</label><b>${esc(f.date)}</b></div>
+        <div><label>DEPART</label><b>${esc(f.dep)}</b></div>
+        <div><label>ARRIVE</label><b>${esc(f.arr)}${f.arrNote ? `<sup>${esc(f.arrNote)}</sup>` : ""}</b></div>
+        <div><label>TERMINAL</label><b>${esc(f.fromT)} → ${esc(f.toT)}</b></div>
+      </div>
+    </div>
+    <div class="tk-stub">
+      <div><label>${tx("ถึงสนามบิน / เช็คอิน","AIRPORT / CHECK-IN")}</label><b>${esc(f.checkin)}</b></div>
+      <div><label>${tx("เคาน์เตอร์ปิด","COUNTER CLOSES")}</label><b>${esc(f.close)}</b></div>
+      <div class="tk-note">${esc(f.note)}</div>
+    </div>
+  </div>`;
+}
+
+const HOTEL = {
+  name:"APA Hotel Shinjuku-Kabukicho Tower",
+  nameJp:"アパホテル〈新宿 歌舞伎町タワー〉",
+  addrEn:"1-20-2 Kabukicho, Shinjuku-ku, Tokyo 160-0021, Japan",
+  addrJp:"〒160-0021 東京都新宿区歌舞伎町1-20-2"
+};
+
+function copyText(text){
+  const fallback = () => {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch(e){}
+    ta.remove(); return ok;
+  };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text).then(() => true, fallback);
+  } catch(e){}
+  return Promise.resolve(fallback());
+}
+
+function renderInfo(){
+  view.innerHTML = `
+  <div class="sec"><div class="h2row"><h2>✈️ Boarding Pass</h2></div>${FLIGHTS.map(ticketHtml).join("")}</div>
+  <div class="sec"><h2>${tx("🏨 ที่พัก","🏨 Hotel")}</h2>
+    <div class="box hotel"><h3>${esc(HOTEL.name)}</h3><div class="jp">${esc(HOTEL.nameJp)}</div>
+      <p>${tx("2-7 Dec · 5 คืน · เดินจาก JR ชินจูกุ East Exit 7-10 นาที","2-7 Dec · 5 nights · 7-10 min walk from JR Shinjuku East Exit")}</p>
+      <dl>
+        <dt>${tx("ที่อยู่ (ENG)","Address (EN)")}</dt><dd>${esc(HOTEL.addrEn)}</dd>
+        <dt>${tx("ที่อยู่ (JP)","Address (JP)")}</dt><dd lang="ja">${esc(HOTEL.addrJp)}</dd>
+      </dl>
+      <div class="acts">
+        <button type="button" data-copy="name">${tx("📋 คัดลอกชื่อ","📋 Copy name")}</button>
+        <button type="button" data-copy="addrEn">${tx("📋 ที่อยู่ (ENG)","📋 Address (EN)")}</button>
+        <button type="button" data-copy="addrJp">${tx("📋 ที่อยู่ (JP)","📋 Address (JP)")}</button>
+        <a href="${esc(MAPS(H))}" target="_blank" rel="noopener">${tx("📍 เปิดแผนที่","📍 Open map")}</a>
+      </div>
+      <div class="copied" id="copied" aria-live="polite"></div></div>
+  </div>
+  <div class="sec"><h2>${tx("🚃 เดินทางในโตเกียว","🚃 Getting around Tokyo")}</h2>
+    <div class="box"><h3>N'EX (Narita Express)</h3>
+      <p>${tx("นาริตะ T2 ↔ ชินจูกุ ตรง 80-90 นาที ทุกที่นั่งต้องจอง","Narita T2 ↔ Shinjuku direct, 80-90 min. All seats are reserved")}</p>
+      <p>${tx("ขาไป Wed 2 Dec ราว 11:00 · ขากลับ Mon 7 Dec ราว 14:30 ลงที่ Airport Terminal 2·3","Outbound Wed 2 Dec around 11:00 · Return Mon 7 Dec around 14:30, get off at Airport Terminal 2·3")}</p></div>
+    <div class="box"><h3>${tx("Suica (2 ใบ)","Suica (2 cards)")}</h3>
+      <p>${tx("ซื้อที่ JR East Travel Service Center สถานี Airport Terminal 2·3 (ชั้น B1) ค่ามัดจำ ¥500 ต่อใบ","Buy at the JR East Travel Service Center, Airport Terminal 2·3 station (B1). ¥500 deposit each")}</p>
+      <p>${tx("ใช้ได้กับรถไฟ JR, Metro, Toei, โมโนเรล Disney และร้านสะดวกซื้อ ถ้าหมดซื้อที่ JR ชินจูกุแทน","Works on JR, Metro, Toei, the Disney monorail and at convenience stores. If sold out, buy at JR Shinjuku")}</p></div>
+    <div class="box map"><h3>${tx("🗺️ แผนที่รถไฟ (เฉพาะสายที่ใช้ในทริปนี้)","🗺️ Rail map (only lines used on this trip)")}</h3>
+      <p>${tx("วาดแบบย่อ ไม่ตรงสเกล เลื่อนซ้าย-ขวาได้ · 🏨 = โรงแรม","Simplified and not to scale, scroll sideways · 🏨 = hotel")}</p>
+      <div class="mapwrap">${railMapSvg()}</div>
+      <div class="legend">${RAIL_LINES.map(l => `<div><i style="background:${l.c}${l.dash ? ";background:repeating-linear-gradient(90deg," + l.c + " 0 6px,transparent 6px 10px)" : ""}"></i><span>${esc(tx(l.th, l.en))}</span><small>${tx("ใช้ " + l.days + " Dec", "used " + l.days + " Dec")}</small></div>`).join("")}</div>
+      <p style="margin-top:10px">${tx("แผนที่ฉบับเต็มของจริง:","Full official maps:")}</p>
+      <div class="chips"><a href="https://www.tokyometro.jp/en/subwaymap/index.html" target="_blank" rel="noopener">Tokyo Metro ↗</a><a href="https://www.kotsu.metro.tokyo.jp/eng/maps/subway/" target="_blank" rel="noopener">Toei Subway ↗</a><a href="https://www.jreast.co.jp/e/" target="_blank" rel="noopener">JR East ↗</a></div>
+</div>
+  </div>`;
+  const label = {name:tx("ชื่อโรงแรม","hotel name"), addrEn:tx("ที่อยู่ (ENG)","address (EN)"), addrJp:tx("ที่อยู่ (JP)","address (JP)")};
+  view.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", () => {
+    const k = btn.dataset.copy, out = document.getElementById("copied");
+    copyText(HOTEL[k]).then(ok => {
+      out.textContent = ok ? tx(`✓ คัดลอก${label[k]}แล้ว`, `✓ Copied ${label[k]}`) : tx("คัดลอกไม่ได้ กดค้างที่ข้อความด้านบนเพื่อคัดลอกเอง","Couldn't copy. Press and hold the text above to copy it");
+      out.classList.add("show"); clearTimeout(out._t); out._t = setTimeout(() => out.classList.remove("show"), 2000);
+    });
+  }));
+}
+
+function speak(text){
+  try {
+    const u = new SpeechSynthesisUtterance(text.replace(/〇〇/g, ""));
+    u.lang = "ja-JP"; u.rate = 0.85;
+    speechSynthesis.cancel(); speechSynthesis.speak(u);
+  } catch(e){}
+}
+
+function renderPhrases(){
+  const canSpeak = (() => { try { return "speechSynthesis" in window && typeof SpeechSynthesisUtterance === "function"; } catch(e){ return false; } })();
+  view.innerHTML = `<div class="sec ph"><h2>${tx("🗣️ ภาษาญี่ปุ่นที่ใช้บ่อย","🗣️ Handy Japanese")}</h2>
+    <p class="phsub">${tx("กดที่ประโยคเพื่อขยายตัวอักษรให้คนญี่ปุ่นอ่าน","Tap a phrase to show it large to staff")}${canSpeak ? tx(" · กด 🔊 เพื่อฟังเสียง"," · tap 🔊 to hear it") : ""}</p>
+    ${PHRASES.map((g, gi) => `<h3>${esc(tx(g.th, g.en))}</h3>` + g.items.map(([jp, ro, th, en], i) => `
+      <div class="pr" data-g="${gi}" data-i="${i}">
+        <div class="pt"><div class="pj" lang="ja">${esc(jp)}</div><div class="pro">${esc(ro)}</div><div class="pm">${esc(tx(th, en))}</div></div>
+        ${canSpeak ? `<button type="button" class="spk" aria-label="speak">🔊</button>` : ""}
+      </div>`).join("")).join("")}
+  </div>
+  <div class="big-ov" id="bigov" hidden><div class="big-card"><div class="bj" lang="ja"></div><div class="bm"></div><button type="button" class="bx">${tx("ปิด","Close")}</button></div></div>`;
+  const ov = document.getElementById("bigov");
+  view.querySelectorAll(".pr").forEach(el => {
+    const [jp, ro, th, en] = PHRASES[el.dataset.g].items[el.dataset.i];
+    el.querySelector(".pt").addEventListener("click", () => {
+      ov.querySelector(".bj").textContent = jp;
+      ov.querySelector(".bm").textContent = ro + " · " + tx(th, en);
+      ov.hidden = false;
+    });
+    const s = el.querySelector(".spk"); if (s) s.addEventListener("click", () => speak(jp));
+  });
+  ov.addEventListener("click", e => { if (e.target === ov || e.target.classList.contains("bx")) ov.hidden = true; });
+}
+
+function renderTips(){
+  view.innerHTML = `<div class="sec tips"><h2>${tx("💡 ข้อควรรู้","💡 Good to know")}</h2>
+    ${TIPS.map(s => `<div class="box"><h3>${s.icon} ${esc(tx(s.th, s.en))}</h3>
+      ${s.items ? `<ul>${s.items.map(i => `<li>${esc(tx(i.th, i.en))}</li>`).join("")}</ul>` : ""}
+      ${s.phones ? `<div class="phones">${s.phones.map(p => `<a href="tel:${encodeURIComponent(p.num.replace(/-/g, ""))}"><span>${esc(tx(p.th, p.en))}</span><b>${esc(p.num)}</b></a>`).join("")}</div>` : ""}
+      ${s.links ? `<div class="chips">${s.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(tx(l.th, l.en))} ↗</a>`).join("")}</div>` : ""}
+    </div>`).join("")}</div>`;
+}
+
+function renderChecklist(){
+  let total = 0, done = 0;
+  const groups = CHECK_V.map((g, gi) => `<h3>${esc(g.title)}</h3>` + g.items.map(([name, when, note, sheetDone], i) => {
+    const key = gi + "-" + i;
+    const on = key in checks ? checks[key] : sheetDone;
+    total++; if (on) done++;
+    return `<label class="${on ? "done" : ""}"><input type="checkbox" data-k="${key}" ${on ? "checked" : ""}>
+      <span class="x"><b>${esc(name)}</b>${when ? `<span class="w">${esc(when)}</span>` : ""}${note ? `<p>${esc(note)}</p>` : ""}</span></label>`;
+  }).join("")).join("");
+  view.innerHTML = `<div class="sec chk"><h2>${tx("✅ เช็คลิสต์","✅ Checklist")}</h2><p style="margin:0;color:var(--muted);font-size:13px">${tx("เสร็จแล้ว","Done")} ${done} / ${total} · ${tx("ติ๊กได้ บันทึกไว้ในเครื่องนี้เท่านั้น","saved on this device only")}</p>
+    <div class="prog"><div style="width:${Math.round(done/total*100)}%"></div></div>${groups}</div>`;
+  view.querySelectorAll("input[type=checkbox]").forEach(cb => cb.addEventListener("change", () => {
+    checks[cb.dataset.k] = cb.checked; store.set("jp-check", checks); renderChecklist();
+  }));
+}
+
+const UI = {
+  plan:["แผนรายวัน","Daily plan"], info:["เดินทาง/ที่พัก","Flights & hotel"], japanese:["ภาษาญี่ปุ่น","Japanese"], tips:["ข้อควรรู้","Good to know"]
+};
+function applyLang(){
+  DAYS_V = lang === "en" ? trDeep(DAYS) : DAYS;
+  CHECK_V = lang === "en" ? trDeep(CHECK) : CHECK;
+  document.documentElement.lang = lang;
+  document.querySelectorAll("#bot a").forEach(a => { a.querySelector("span").textContent = UI[a.dataset.id][lang === "en" ? 1 : 0]; });
+  document.querySelectorAll("#langs button").forEach(b => b.classList.toggle("on", b.dataset.lang === lang));
+}
+document.querySelectorAll("#langs button").forEach(b => b.addEventListener("click", () => {
+  if (b.dataset.lang === lang) return;
+  const y = window.scrollY;
+  lang = b.dataset.lang; store.set("jp-lang", lang); applyLang(); route(); window.scrollTo(0, y);
+}));
+
+function route(){
+  const h = (location.hash || "").slice(1);
+  const d = DAYS_V.find(x => x.id === h);
+  const tab = ["info","tips","japanese"].includes(h) ? h : "plan";
+  document.querySelectorAll("#bot a").forEach(a => a.classList.toggle("on", a.dataset.id === tab));
+  if (tab === "info") renderInfo();
+  else if (tab === "tips") renderTips();
+  else if (tab === "japanese") renderPhrases();
+  else renderDay(d || DAYS_V[0]);
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+applyLang();
+route();
+</script>
+</body></html>
