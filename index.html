@@ -306,7 +306,7 @@ const DAYS = [
   L("","วัดเซ็นโซจิ","ริมแม่น้ำสุมิดะ","เดิน","","","~5-10 นาที","เดินออกประตูฝั่งตะวันออกของวัดไปทางแม่น้ำ",DIR("Sensoji+Temple","Sumida+Park+Asakusa","walking"),"walk"),
   S("10:45","ริมแม่น้ำสุมิดะ","ถ่ายรูปชุดกิโมโน มี Skytree เป็นฉากหลัง","Sumida+Park+Asakusa"),
   L("","ริมแม่น้ำสุมิดะ","HATCOFFEE","เดิน","","","~15-20 นาที","เดินไปทางตะวันตกผ่านฝั่งใต้ของวัด ข้ามถนน Kokusai-dori ร้านอยู่ย่านโคโตบุกิ ใกล้สถานี Tawaramachi",DIR("Sumida+Park+Asakusa","HATCOFFEE+Kotobuki+Taito","walking"),"walk"),
-  S("11:30","HATCOFFEE (ลาเต้อาร์ต 3D)","ร้านลาเต้อาร์ตของ Kohei Matsuno ให้ดูรูปในมือถือ แล้วปั้นฟองนมเป็นรูปนั้นให้ ทั้งแบบ 2D และ 3D ทำให้ดูตรงหน้า อยู่ Kotobuki 3-15-6 เปิด 11:00-18:00 ปิดวันพุธ","HATCOFFEE+Kotobuki+Taito",{tip:{title:"📅 ต้องจองก่อน",items:["จองโต๊ะผ่าน TableCheck (tablecheck.com/hatcoffee) รอบ 11:30 วันอาทิตย์ 6 Dec ใส่กิโมโนไปถ่ายรูปกับแก้วลาเต้ได้","เตรียมรูปที่อยากได้ไว้ในมือถือ เช่น รูปสัตว์เลี้ยงหรือตัวการ์ตูนที่ชอบ"]}}),
+  S("11:30","HATCOFFEE (ลาเต้อาร์ต 3D)","ร้านลาเต้อาร์ตของ Kohei Matsuno ให้ดูรูปในมือถือ แล้วปั้นฟองนมเป็นรูปนั้นให้ ทั้งแบบ 2D และ 3D ทำให้ดูตรงหน้า อยู่ Kotobuki 3-15-6 เปิด 11:00-18:00 ปิดวันพุธ","HATCOFFEE+Kotobuki+Taito",{book:"https://www.tablecheck.com/en/hatcoffee/reserve/message?start_at_epoch=1796524200&num_people=2&service_category_id=default",tip:{title:"📅 ต้องจองก่อน",items:["จองโต๊ะผ่าน TableCheck (tablecheck.com/hatcoffee) รอบ 11:30 วันอาทิตย์ 6 Dec ใส่กิโมโนไปถ่ายรูปกับแก้วลาเต้ได้","เตรียมรูปที่อยากได้ไว้ในมือถือ เช่น รูปสัตว์เลี้ยงหรือตัวการ์ตูนที่ชอบ"]}}),
   S("12:30","คืนชุดกิโมโน","ร้าน HATCOFFEE อยู่ระหว่าง Tawaramachi กับ Kuramae ถ้าเลือกร้านเช่ากิโมโนแถวนี้ เดินไปคืนชุดได้ใกล้ คืนชุดก่อนกินมื้อเที่ยง จะได้ไม่ต้องกลัวน้ำซุปเปื้อน ร้านส่วนใหญ่ให้คืนได้ถึง 16:30-17:30",null),
   S("13:00","มื้อเที่ยง: Ramen Hayashida Asakusa","ราเมนโชยุ + ข้าววากิวหน้าไข่แดง สั่งที่ตู้หน้าร้าน เปิด 10:00-23:00 ขอผ้ากันเปื้อน (紙エプロン) ก่อนกิน","Ramen+Hayashida+Asakusa&query_place_id=ChIJuzbNpwyPGGARI2Fdp8soFGw"),
   L("","Ramen Hayashida","Hatoya Asakusa","เดิน","","","~5-10 นาที","",DIR("Ramen+Hayashida+Asakusa","Hatoya+Asakusa","walking"),"walk"),
@@ -575,7 +575,7 @@ function stopHtml(it, first){
   return `<div class="it${first ? " first" : ""}"><div class="cd">
     <button class="hd" type="button"><div class="tm">${esc(it.t)}${it.pre ? `<small>${esc(it.pre)}</small>` : ""}</div>
       <div class="nm"><b>${esc(it.n)}</b>${viaSummary(it.via)}${it.d ? `<span>${esc(it.d)}</span>` : ""}</div><div class="ar">▼</div></button>
-    <div class="bd"><hr>${stepsHtml(it.via, tx("🧭 วิธีไปที่นี่","🧭 How to get here"))}<div class="chips">${map}</div>${tipHtml(it.tip)}${stepsHtml(it.after, it.after.some(l => l.to === "โรงแรม" || l.to === "Hotel") ? tx("🏨 กลับโรงแรม","🏨 Back to the hotel") : tx("➡️ หลังจากนี้","➡️ After this"))}</div></div></div>`;
+    <div class="bd"><hr>${stepsHtml(it.via, tx("🧭 วิธีไปที่นี่","🧭 How to get here"))}<div class="chips">${map}${it.book ? `<a href="${esc(it.book)}" target="_blank" rel="noopener">${tx("📅 จองโต๊ะ","📅 Book a table")}</a>` : ""}</div>${tipHtml(it.tip)}${stepsHtml(it.after, it.after.some(l => l.to === "โรงแรม" || l.to === "Hotel") ? tx("🏨 กลับโรงแรม","🏨 Back to the hotel") : tx("➡️ หลังจากนี้","➡️ After this"))}</div></div></div>`;
 }
 
 function stepsHtml(legs, label){
