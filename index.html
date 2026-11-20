@@ -455,12 +455,12 @@ const PHRASES = [
 ];
 // Simplified, hand-drawn schematic of only the lines used on this trip (not to scale)
 const RAIL_LINES = [
-  {id:"yamanote", c:"#80C241", w:7, th:"JR Yamanote (วงกลม)", en:"JR Yamanote (loop)", d:"M150,140 Q150,100 190,100 L480,100 Q520,100 520,140 L520,430 Q520,470 480,470 L190,470 Q150,470 150,430 Z", days:"5"},
+  {id:"yamanote", c:"#80C241", w:7, th:"JR Yamanote (วงกลม)", en:"JR Yamanote (loop)", d:"M150,140 Q150,100 190,100 L480,100 Q520,100 520,140 L520,430 Q520,470 480,470 L190,470 Q150,470 150,430 Z", days:"5, 7"},
   {id:"chuo", c:"#F15A22", w:6, th:"JR Chuo Rapid", en:"JR Chuo Rapid", d:"M150,250 L330,250 L400,320 L520,320", days:"2, 3"},
-  {id:"ginza", c:"#F39700", w:6, th:"Ginza Line (G)", en:"Ginza Line (G)", d:"M150,410 L290,410 L440,410 L470,390 L470,165 L500,140 L520,130 L640,130", days:"5, 6"},
-  {id:"marunouchi", c:"#E60012", w:6, th:"Marunouchi Line (M)", en:"Marunouchi Line (M)", d:"M150,262 L210,262 L338,390 L470,390 L520,330", days:"7"},
-  {id:"hibiya", c:"#9CAEB7", w:6, th:"Hibiya Line (H)", en:"Hibiya Line (H)", d:"M470,390 L560,410", days:"7"},
-  {id:"oedo", c:"#CE045B", w:6, th:"Toei Oedo Line (E)", en:"Toei Oedo Line (E)", d:"M118,215 L118,180 L140,158 L600,158 L640,180 L640,330 L610,450", days:"6"},
+  {id:"shonan", c:"#E0301E", w:5, th:"JR Shonan-Shinjuku Line → คามาคุระ", en:"JR Shonan-Shinjuku Line → Kamakura", d:"M136,250 L136,420 L250,530", days:"5"},
+  {id:"enoden", c:"#1B7F3B", w:5, th:"Enoden (เอโนเด็น)", en:"Enoden", d:"M250,530 L215,560 L40,560", days:"5"},
+  {id:"ginza", c:"#F39700", w:6, th:"Ginza Line (G)", en:"Ginza Line (G)", d:"M150,410 L290,410 L440,410 L470,390 L470,165 L500,140 L520,130 L640,130", days:"6, 7"},
+  {id:"oedo", c:"#CE045B", w:6, th:"Toei Oedo Line (E)", en:"Toei Oedo Line (E)", d:"M118,215 L118,180 L140,158 L600,158 L640,180 M150,262 L200,300 L330,380 L400,450 L440,450", days:"5, 6"},
   {id:"keiyo", c:"#C9252F", w:5, th:"JR Keiyo", en:"JR Keiyo", d:"M520,326 L660,420 L680,500 L770,500", days:"3"},
   {id:"tx", c:"#2E3192", w:5, th:"Tsukuba Express", en:"Tsukuba Express", d:"M520,230 L640,130", days:"6"},
   {id:"tobu", c:"#0F6CC3", w:5, th:"Tobu Skytree Line", en:"Tobu Skytree Line", d:"M640,130 L740,130", days:"6"},
@@ -471,26 +471,28 @@ const RAIL_LINES = [
 ];
 // [name, x, y, labelDx, labelDy, anchor, major]
 const RAIL_STATIONS = [
-  ["Shinjuku",150,250,-12,4,"end",1],
+  ["Shinjuku",150,250,-20,4,"end",1],
   ["Shinjuku-nishiguchi",118,215,-10,-6,"end",0],
   ["Shinjuku-sanchome",210,262,6,20,"start",0],
-  ["Harajuku",150,340,-12,4,"end",0],
-  ["Shibuya",150,410,-12,4,"end",1],
+  ["Harajuku",150,340,-20,4,"end",0],
+  ["Shibuya",150,410,-20,4,"end",1],
   ["Omotesando",230,410,0,22,"middle",0],
   ["Gaienmae",290,410,0,-12,"middle",0],
   ["Kudanshita",380,200,0,-12,"middle",0],
-  ["Ginza",470,390,-10,22,"end",1],
+  ["Akabanebashi",440,450,0,-12,"middle",0],
+  ["Hamamatsucho",520,420,12,4,"start",0],
   ["Tokyo",520,322,12,4,"start",1],
   ["Akihabara",520,230,12,16,"start",0],
   ["Ueno",520,130,-10,-10,"end",1],
   ["Kuramae",640,180,12,4,"start",0],
   ["Asakusa",640,130,0,-12,"middle",1],
   ["Tokyo Skytree",740,130,0,-12,"middle",1],
-  ["Tsukiji",560,410,8,18,"start",0],
-  ["Tsukishima",610,450,-10,16,"end",0],
-  ["Shin-Kiba",680,500,0,22,"middle",0],
   ["Maihama",770,500,0,-14,"middle",1],
-  ["Tokyo DisneySea",770,545,0,20,"middle",1]
+  ["Tokyo DisneySea",770,545,0,20,"middle",1],
+  ["Kamakura",250,530,12,4,"start",1],
+  ["Hase",185,560,0,20,"middle",0],
+  ["Shichirigahama",115,560,0,20,"middle",0],
+  ["Kamakurakokomae",40,560,0,-12,"middle",0]
 ];
 
 function railMapSvg(){
@@ -501,6 +503,7 @@ function railMapSvg(){
     <rect x="-20" y="30" width="880" height="560" fill="#FFFAFB"/>
     ${lines}
     <text x="465" y="54" text-anchor="middle" font-size="12" font-weight="700" fill="#B5121B">🚄 N'EX ✈ Narita Airport</text>
+    <text x="440" y="492" text-anchor="middle" font-size="12" font-weight="700" fill="#4A2E3B">🗼 Tokyo Tower</text>
     <g><rect x="160" y="212" width="74" height="22" rx="11" fill="#F885A7"/><text x="197" y="227" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">🏨 APA</text></g>
     ${st}
   </svg>`;
