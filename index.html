@@ -184,6 +184,47 @@ nav.bot a.on:after{content:"";position:absolute;bottom:-4px;left:50%;width:26px;
 .tips .box{border-top:4px solid #FCDEE2}
 .tips .box:nth-child(odd){border-top-color:#F9C4D2}
 .days a.on small{color:#fff}
+
+/* ===== Desktop ===== */
+@media (min-width:960px){
+  body{font-size:15.5px}
+  .app{max-width:1200px;padding-top:64px;padding-bottom:40px;box-shadow:0 0 0 1px var(--line),0 10px 40px rgba(248,133,167,.12)}
+  header.top{grid-template-columns:120px 1fr 120px;padding:22px 32px}
+  .ttl b{font-size:28px}
+  nav.bot{top:0;bottom:auto;z-index:15}
+  nav.bot .in{max-width:1200px;display:flex;justify-content:center;gap:6px;padding:8px 16px;border-top:0;border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(248,133,167,.12)}
+  nav.bot a{display:flex;align-items:center;gap:8px;padding:8px 18px;border-radius:12px;font-size:14.5px}
+  nav.bot a i{display:inline;font-size:20px}
+  nav.bot a:hover{background:var(--chip);color:var(--priInk)}
+  nav.bot a.on{background:var(--chip)}
+  nav.bot a.on:after{display:none}
+  .days{flex-wrap:wrap;justify-content:center;overflow:visible;padding:22px 32px 4px}
+  .days a{min-width:150px;transition:transform .12s}
+  .days a:hover{transform:translateY(-2px);border-color:#F6C6D3}
+  .banner,.tl{max-width:920px;margin-left:auto;margin-right:auto}
+  .banner{margin-top:20px;font-size:18px}
+  .hd:hover{background:#FFF7FA}
+  .sec{margin:28px 32px 0}
+  .sec h2{font-size:20px}
+  #view[data-tab=info] .sec:first-child>.tk{display:inline-grid;width:calc(50% - 10px);vertical-align:top}
+  #view[data-tab=info] .sec:first-child>.tk+.tk{margin-left:16px}
+  #view[data-tab=info] .sec:last-child{display:grid;grid-template-columns:1fr 1fr;column-gap:16px;align-items:start}
+  #view[data-tab=info] .sec:last-child>h2,#view[data-tab=info] .sec:last-child>.map{grid-column:1/-1}
+  .mapwrap{overflow:visible;margin:8px 0 10px;padding:0}
+  .mapwrap svg{min-width:0}
+  .legend{grid-template-columns:repeat(4,1fr)}
+  .tips{columns:2;column-gap:16px}
+  .tips h2{column-span:all}
+  .tips .box{break-inside:avoid;display:inline-block;width:100%}
+  .ph{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;align-items:stretch}
+  .ph>h2,.ph>.phsub,.ph>h3{grid-column:1/-1}
+  .pr:hover,.chk label:hover{border-color:#F6C6D3}
+  .note{margin:28px 32px}
+}
+@media (min-width:960px) and (max-width:1100px){
+  #view[data-tab=info] .sec:first-child>.tk{display:grid;width:auto}
+  #view[data-tab=info] .sec:first-child>.tk+.tk{margin-left:0}
+}
 </style>
 </head>
 <body>
@@ -811,6 +852,7 @@ function route(){
   const h = (location.hash || "").slice(1);
   const d = DAYS_V.find(x => x.id === h);
   const tab = ["info","tips","japanese"].includes(h) ? h : "plan";
+  view.dataset.tab = tab;
   document.querySelectorAll("#bot a").forEach(a => a.classList.toggle("on", a.dataset.id === tab));
   if (tab === "info") renderInfo();
   else if (tab === "tips") renderTips();
