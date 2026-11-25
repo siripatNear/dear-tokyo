@@ -712,7 +712,10 @@ const HOTEL = {
   name:"APA Hotel Shinjuku-Kabukicho Tower",
   nameJp:"アパホテル〈新宿 歌舞伎町タワー〉",
   addrEn:"1-20-2 Kabukicho, Shinjuku-ku, Tokyo 160-0021, Japan",
-  addrJp:"〒160-0021 東京都新宿区歌舞伎町1-20-2"
+  addrJp:"〒160-0021 東京都新宿区歌舞伎町1-20-2",
+  tel:"03-5155-3811",
+  telIntl:"+81-3-5155-3811",
+  email:"ahshin-k@guest.apa.co.jp"
 };
 
 function copyText(text){
@@ -738,6 +741,8 @@ function renderInfo(){
       <dl>
         <dt>${tx("ที่อยู่ (ENG)","Address (EN)")}</dt><dd>${esc(HOTEL.addrEn)}</dd>
         <dt>${tx("ที่อยู่ (JP)","Address (JP)")}</dt><dd lang="ja">${esc(HOTEL.addrJp)}</dd>
+        <dt>${tx("โทร","Phone")}</dt><dd><a href="tel:+81351553811">${esc(HOTEL.tel)}</a> <span style="color:var(--muted)">(${tx("จากเบอร์ต่างประเทศ","from a non-JP number")} ${esc(HOTEL.telIntl)})</span></dd>
+        <dt>${tx("อีเมล","Email")}</dt><dd><a href="mailto:${esc(HOTEL.email)}">${esc(HOTEL.email)}</a></dd>
       </dl>
       <div class="acts">
         <button type="button" data-copy="name">${tx("📋 คัดลอกชื่อ","📋 Copy name")}</button>
